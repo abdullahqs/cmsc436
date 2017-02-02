@@ -34,8 +34,10 @@ public class TapConfigActivity extends AppCompatActivity {
                     isleft = false;
                 }
 
-                Intent i=new Intent(MainActivity.this, MainActivity2.class);
+                TapTestResults result = new TapTestResults(isleft,numberoftests);
 
+                Intent i=new Intent(TapConfigActivity.this, TapTestActivity.class);
+                startActivity(i);
 
             }
         });
