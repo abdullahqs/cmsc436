@@ -37,6 +37,7 @@ public class TapConfigActivity extends AppCompatActivity {
                 TapTestResults result = new TapTestResults(isleft,numberoftests);
 
                 Intent i=new Intent(TapConfigActivity.this, TapTestActivity.class);
+                i.putExtra("EXTRA_SESSION_ID", result);
                 startActivity(i);
 
             }
