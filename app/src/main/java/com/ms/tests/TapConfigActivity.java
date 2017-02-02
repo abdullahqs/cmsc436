@@ -1,5 +1,6 @@
 package com.ms.tests;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class TapConfigActivity extends AppCompatActivity {
                 if(rightButton.isChecked()){
                     isleft = false;
                 }
+
+                Intent i=new Intent(MainActivity.this, MainActivity2.class);
 
 
             }
