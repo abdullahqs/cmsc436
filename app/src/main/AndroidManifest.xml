@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TapTestActivity" />
-        <activity android:name=".TapTestResultActivity"></activity>
+        <activity android:name=".TapTestResultActivity" />
+        <activity android:name=".TapConfigActivity"></activity>
     </application>
 
 </manifest>
