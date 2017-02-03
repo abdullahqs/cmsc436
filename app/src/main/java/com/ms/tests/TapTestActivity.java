@@ -15,6 +15,7 @@ public class TapTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap_test);
 
+        // Handles count down at beginning
         final ImageView countDownBG = (ImageView) findViewById(R.id.tap_test_bg);
         final TextView countDownText = (TextView) findViewById(R.id.tap_test_title);
         new CountDownTimer(4000, 1000) {
