@@ -4,10 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MultipleSclerosisTests.iml" filepath="$PROJECT_DIR$/MultipleSclerosisTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cmsc436.iml" filepath="$PROJECT_DIR$/cmsc436.iml" />
       <module fileurl="file://$PROJECT_DIR$/cmsc436.iml" filepath="$PROJECT_DIR$/cmsc436.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms.iml" filepath="$PROJECT_DIR$/ms.iml" />
     </modules>
   </component>
 </project>
