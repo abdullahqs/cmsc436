@@ -3,6 +3,7 @@ package com.ms.tests;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class TapTestResultActivity extends AppCompatActivity {
 
@@ -11,7 +12,11 @@ public class TapTestResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap_test_result);
 
-        Intent i = getIntent();
+        TextView handTest = (TextView) findViewById(R.id.handTest);
+        TextView numTests = (TextView) findViewById(R.id.numTests);
+        TextView averageTaps = (TextView) findViewById(R.id.averageTaps);
+
+        //Intent i = getIntent();
         // PRODUCTION - TapTestResults results = (TapTestResults) i.getParcelableExtra("TEST_RESULTS");
         // TESTING
         TapTestResults results = new TapTestResults(true, 4);
@@ -19,5 +24,14 @@ public class TapTestResultActivity extends AppCompatActivity {
         results.TestResults[1] = 4;
         results.TestResults[2] = 12;
         results.TestResults[3] = 6;
+
+        int totalNumTaps = 0;
+        for(int k = 0; k < results.NumTests; k++) {
+            totalNumTaps += results.TestResults[k];
+        }
+
+        handTest.setText(results.IsLeftHand ? "Left hand test" : "Right hand test" );
+        numTests.setText("Ran a total of: " + results.NumTests + " tests.");
+        averageTaps.setText("Average of: " + (totalNumTaps / results.NumTests) + " taps per test.");
     }
 }
