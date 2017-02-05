@@ -20,7 +20,7 @@ public class TestSelectionActivity extends AppCompatActivity {
     //@Override
     public void onClick(View v) {
 
-        Intent i=new Intent(TestSelectionActivity.this, TapTestActivity.class);
+        Intent i=new Intent(TestSelectionActivity.this, TapConfigActivity.class);
         startActivity(i);
 
     }
