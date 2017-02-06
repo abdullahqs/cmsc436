@@ -34,7 +34,7 @@ public class TapConfigActivity extends AppCompatActivity {
                 TapTestResults result = new TapTestResults(isleft, numberoftests);
 
                 Intent i=new Intent(TapConfigActivity.this, TapTestActivity.class);
-                i.putExtra("TEST_RESULTS", result);
+                i.putExtra(TapTestResults.RESULTS_KEY, result);
                 startActivity(i);
 
             }

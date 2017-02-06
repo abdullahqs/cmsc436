@@ -19,7 +19,7 @@ public class TapTestResultActivity extends AppCompatActivity {
         TextView averageTaps = (TextView) findViewById(R.id.averageTaps);
 
         Intent i = getIntent();
-        TapTestResults results = (TapTestResults) i.getParcelableExtra("TEST_RESULTS");
+        TapTestResults results = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
 
         int totalNumTaps = 0;
         for(int k = 0; k < results.numTests; k++) {

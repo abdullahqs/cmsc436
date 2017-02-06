@@ -19,7 +19,7 @@ public class TapTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tap_test);
 
         Intent i = getIntent();
-        _testResults = (TapTestResults)i.getParcelableExtra("TEST_RESULTS");
+        _testResults = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
         _testRound = i.getIntExtra("TEST_ROUND", 1);
 
         initCountdown();

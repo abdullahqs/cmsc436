@@ -8,6 +8,8 @@ import android.os.Parcelable;
  */
 
 public class TapTestResults implements Parcelable {
+    public static final String RESULTS_KEY = "TEST_RESULTS";
+
     public Boolean isLeftHand;
     public int numTests;
     public int[] testResults;
