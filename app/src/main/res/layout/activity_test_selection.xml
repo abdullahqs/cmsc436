@@ -9,42 +9,57 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#F1F7ED"
     tools:context="com.ms.tests.TestSelectionActivity">
 
     <Button
         android:text="Tap Test"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250px"
         android:id="@+id/tapButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="onClick"
+        android:textSize="50sp"
+        android:fontFamily="Roboto"
+        android:background="#E0FF4F"
+        android:textColor="#000000"
         />
 
     <Button
         android:text="Spiral Test"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250px"
         android:layout_marginTop="16dp"
         android:id="@+id/spiralButton"
         android:layout_below="@+id/tapButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="50sp"
+        android:fontFamily="Roboto"
+        android:background="#FF6663"
+        android:textColor="#000000"
+        />
 
     <Button
         android:text="Spider Test"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spiralButton"
-        android:layout_marginTop="18dp"
+        android:layout_height="250px"
         android:id="@+id/spiderButton"
+        android:layout_below="@+id/spiralButton"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="50sp"
+        android:fontFamily="Roboto"
+        android:background="#BFD7EA"
+        android:textColor="#000000"
+        />
 
 </RelativeLayout>

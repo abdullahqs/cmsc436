@@ -17,16 +17,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:textSize="25sp"
         android:id="@+id/lefthand" />
-
-    <RadioButton
-        android:text="Right Hand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lefthand"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/righthand" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,25 +30,49 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="38dp"
         android:id="@+id/numberoftests"
-        android:singleLine="false" />
+        />
+
+    <RadioButton
+        android:text="Right Hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/righthand"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_alignParentTop="true"
+        android:textSize="25sp"
+        />
 
     <TextView
         android:text="How Many Tests Would You Like?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:id="@+id/Title"
-        android:layout_below="@+id/righthand"
+        android:layout_alignTop="@+id/numberoftests"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="Roboto"
+        />
 
     <Button
         android:text="Start Tests"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/numberoftests"
+        android:layout_height="250px"
+        android:id="@+id/teststart"
+        android:textSize="50sp"
+        android:fontFamily="Roboto"
+        android:background="#E0FF4F"
+        android:textColor="#000000"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/teststart" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
