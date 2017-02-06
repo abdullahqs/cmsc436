@@ -13,7 +13,6 @@ public class TapTestActivity extends AppCompatActivity {
     private TapTestResults _testResults;
     private int _testRound;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,12 +57,12 @@ public class TapTestActivity extends AppCompatActivity {
 
     void finishTest() {
         int results = 0;
-        _testResults.TestResults[_testRound - 1] = results;
+        _testResults.testResults[_testRound - 1] = results;
 
         _testRound += 1;
 
         Intent i;
-        if (_testRound <= _testResults.NumTests) {
+        if (_testRound <= _testResults.numTests) {
             i = new Intent(getBaseContext(), TapTestActivity.class);
             i.putExtra("TEST_ROUND", _testRound);
         } else {

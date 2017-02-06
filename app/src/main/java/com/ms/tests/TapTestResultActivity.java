@@ -20,21 +20,15 @@ public class TapTestResultActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         TapTestResults results = (TapTestResults) i.getParcelableExtra("TEST_RESULTS");
-        // TESTING
-        /*TapTestResults results = new TapTestResults(true, 4);
-        results.TestResults[0] = 8;
-        results.TestResults[1] = 4;
-        results.TestResults[2] = 12;
-        results.TestResults[3] = 6;*/
 
         int totalNumTaps = 0;
-        for(int k = 0; k < results.NumTests; k++) {
-            totalNumTaps += results.TestResults[k];
+        for(int k = 0; k < results.numTests; k++) {
+            totalNumTaps += results.testResults[k];
         }
 
-        handTest.setText(results.IsLeftHand ? "Left hand test" : "Right hand test" );
-        numTests.setText("Ran a total of: " + results.NumTests + " tests.");
-        averageTaps.setText("Average of: " + (totalNumTaps / results.NumTests) + " taps per test.");
+        handTest.setText(results.isLeftHand ? "Left hand test" : "Right hand test" );
+        numTests.setText("Ran a total of: " + results.numTests + " test" + (results.numTests > 1 ? "s" : "") + ".");
+        averageTaps.setText("Average of: " + (totalNumTaps / results.numTests) + " taps per test.");
 
         final Button button = (Button) findViewById(R.id.restartButton);
         button.setOnClickListener(new View.OnClickListener() {

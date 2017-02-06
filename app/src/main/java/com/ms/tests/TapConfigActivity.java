@@ -15,9 +15,6 @@ public class TapConfigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tap_config);
 
-
-
-
         final Button button = (Button) findViewById(R.id.teststart);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
