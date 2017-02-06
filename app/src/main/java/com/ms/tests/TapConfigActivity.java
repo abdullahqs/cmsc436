@@ -19,7 +19,10 @@ public class TapConfigActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.numberoftests);
-                int numberoftests = Integer.parseInt(editText.getText().toString());
+
+                int numTests = 1;
+                if(!editText.getText().toString().isEmpty())
+                    numTests = Integer.parseInt(editText.getText().toString());
 
                 RadioButton leftButton, rightButton;
 
@@ -31,7 +34,7 @@ public class TapConfigActivity extends AppCompatActivity {
                     isleft = false;
                 }
 
-                TapTestResults result = new TapTestResults(isleft, numberoftests);
+                TapTestResults result = new TapTestResults(isleft, numTests);
 
                 Intent i=new Intent(TapConfigActivity.this, TapTestActivity.class);
                 i.putExtra(TapTestResults.RESULTS_KEY, result);
