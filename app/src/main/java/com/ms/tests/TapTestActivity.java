@@ -67,7 +67,7 @@ public class TapTestActivity extends AppCompatActivity {
             i = new Intent(getBaseContext(), TapTestActivity.class);
             i.putExtra("TEST_ROUND", _testRound);
         } else {
-            i = new Intent(getBaseContext(), TapTestResults.class);
+            i = new Intent(getBaseContext(), TapTestResultActivity.class);
         }
         i.putExtra("TEST_RESULTS", _testResults);
 

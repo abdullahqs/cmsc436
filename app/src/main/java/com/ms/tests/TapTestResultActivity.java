@@ -16,14 +16,14 @@ public class TapTestResultActivity extends AppCompatActivity {
         TextView numTests = (TextView) findViewById(R.id.numTests);
         TextView averageTaps = (TextView) findViewById(R.id.averageTaps);
 
-        //Intent i = getIntent();
-        // PRODUCTION - TapTestResults results = (TapTestResults) i.getParcelableExtra("TEST_RESULTS");
+        Intent i = getIntent();
+        TapTestResults results = (TapTestResults) i.getParcelableExtra("TEST_RESULTS");
         // TESTING
-        TapTestResults results = new TapTestResults(true, 4);
+        /*TapTestResults results = new TapTestResults(true, 4);
         results.TestResults[0] = 8;
         results.TestResults[1] = 4;
         results.TestResults[2] = 12;
-        results.TestResults[3] = 6;
+        results.TestResults[3] = 6;*/
 
         int totalNumTaps = 0;
         for(int k = 0; k < results.NumTests; k++) {
