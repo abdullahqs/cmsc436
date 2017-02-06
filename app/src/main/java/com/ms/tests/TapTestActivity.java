@@ -1,17 +1,33 @@
 package com.ms.tests;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TapTestActivity extends AppCompatActivity {
+    private static final String ROUND_KEY = "TEST_ROUND";
+    private static final int TEST_START = 10000;
+    private static final int TEST_END = 0;
+
+    private CountDownTimer _tappingTest = new CountDownTimer(TEST_START, TEST_END) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+        }
+
+        @Override
+        public void onFinish() {
+            finishTest();
+        }
+    };
+
     private TapTestResults _testResults;
     private int _testRound;
+    private int _tapsCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +36,15 @@ public class TapTestActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         _testResults = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
-        _testRound = i.getIntExtra("TEST_ROUND", 1);
+        _testRound = i.getIntExtra(ROUND_KEY, 1);
+
+        ImageView testArea = (ImageView) findViewById(R.id.tap_test_area);
+        testArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _tapsCount++;
+            }
+        });
 
         initCountdown();
     }
@@ -43,32 +67,22 @@ public class TapTestActivity extends AppCompatActivity {
     }
 
     void startTest() {
-        ImageView testArea = (ImageView) findViewById(R.id.tap_test_area);
-        testArea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (true) {
-                    finishTest();
-                }
-            }
-        });
+        _tappingTest.start();
     }
 
     void finishTest() {
-        int results = 0;
-        _testResults.testResults[_testRound - 1] = results;
-
+        _testResults.testResults[_testRound - 1] = _tapsCount;
         _testRound += 1;
 
         Intent i;
         if (_testRound <= _testResults.numTests) {
             i = new Intent(getBaseContext(), TapTestActivity.class);
-            i.putExtra("TEST_ROUND", _testRound);
+            i.putExtra(ROUND_KEY, _testRound);
         } else {
             i = new Intent(getBaseContext(), TapTestResultActivity.class);
         }
-        i.putExtra("TEST_RESULTS", _testResults);
+
+        i.putExtra(TapTestResults.RESULTS_KEY, _testResults);
 
         startActivity(i);
     }
