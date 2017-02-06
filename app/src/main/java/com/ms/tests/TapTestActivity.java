@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 public class TapTestActivity extends AppCompatActivity {
     private static final String ROUND_KEY = "TEST_ROUND";
-    private static final int TEST_START = 10000;
-    private static final int TEST_END = 0;
+    private static final int TEST_DURATION = 10000;
+    private static final int COUNTDOWN_INTERVAL = 1000;
 
-    private CountDownTimer _tappingTest = new CountDownTimer(TEST_START, TEST_END) {
+    private CountDownTimer _tappingTest = new CountDownTimer(TEST_DURATION, COUNTDOWN_INTERVAL) {
         @Override
         public void onTick(long millisUntilFinished) {
         }
@@ -53,7 +53,7 @@ public class TapTestActivity extends AppCompatActivity {
         // Handles count down at beginning
         final ImageView countDownBG = (ImageView) findViewById(R.id.tap_test_bg);
         final TextView countDownText = (TextView) findViewById(R.id.tap_test_title);
-        new CountDownTimer(4000, 1000) {
+        new CountDownTimer(4000, COUNTDOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
                 countDownText.setText(String.valueOf(millisUntilFinished / 1000));
             }
