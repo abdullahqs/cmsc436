@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class TapTestActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class TapTestActivity extends AppCompatActivity {
         }
     };
 
+    private RelativeLayout _tapView;
     private TextView _tapCountView;
     private TapTestResults _testResults;
     private int _testRound;
@@ -43,6 +45,7 @@ public class TapTestActivity extends AppCompatActivity {
         _testRound = i.getIntExtra(ROUND_KEY, 1);
 
         _tapCountView = (TextView) findViewById(R.id.tap_count_view);
+        _tapView = (RelativeLayout) findViewById(R.id.tap_view);
 
         final Button testArea = (Button) findViewById(R.id.tap_test_area);
         testArea.setOnTouchListener(new View.OnTouchListener() {
@@ -85,6 +88,7 @@ public class TapTestActivity extends AppCompatActivity {
 
     void startTest() {
         _tappingTest.start();
+        _tapView.setVisibility(View.VISIBLE);
     }
 
     void finishTest() {
