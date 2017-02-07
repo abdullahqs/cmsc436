@@ -3,9 +3,12 @@ package com.ms.tests;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ public class TapTestActivity extends AppCompatActivity {
         }
     };
 
+    private TextView _tapCountView;
     private TapTestResults _testResults;
     private int _testRound;
     private int _tapsCount = 0;
@@ -38,11 +42,20 @@ public class TapTestActivity extends AppCompatActivity {
         _testResults = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
         _testRound = i.getIntExtra(ROUND_KEY, 1);
 
-        ImageView testArea = (ImageView) findViewById(R.id.tap_test_area);
-        testArea.setOnClickListener(new View.OnClickListener() {
+        _tapCountView = (TextView) findViewById(R.id.tap_count_view);
+
+        final Button testArea = (Button) findViewById(R.id.tap_test_area);
+        testArea.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                _tapsCount++;
+            public boolean onTouch(View view, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    _tapsCount++;
+                    updateText();
+                    testArea.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
+                } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    testArea.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
+                }
+                return false;
             }
         });
 
@@ -64,6 +77,10 @@ public class TapTestActivity extends AppCompatActivity {
                 startTest();
             }
         }.start();
+    }
+
+    private void updateText(){
+        _tapCountView.setText("Taps: " + _tapsCount);
     }
 
     void startTest() {
