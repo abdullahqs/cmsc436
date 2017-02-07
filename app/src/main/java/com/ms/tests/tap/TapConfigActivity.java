@@ -1,4 +1,4 @@
-package com.ms.tests;
+package com.ms.tests.tap;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import com.ms.tests.R;
 
 public class TapConfigActivity extends AppCompatActivity {
 

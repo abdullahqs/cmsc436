@@ -1,4 +1,4 @@
-package com.ms.tests;
+package com.ms.tests.tap;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.ms.tests.tap.TapConfigActivity;
+
 public class TestSelectionActivity extends AppCompatActivity {
 
     @Override

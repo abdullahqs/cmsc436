@@ -4,7 +4,7 @@
     android:id="@+id/activity_tap_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ms.tests.TapTestActivity">
+    tools:context="com.ms.tests.tap.TapTestActivity">
 
     <ImageView
         android:id="@+id/tap_test_bg"
