@@ -8,6 +8,59 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ms.tests.TapTestResultActivity">
+    tools:context="com.ms.tests.tap.TapTestResultActivity">
 
+    <TextView
+        android:text="Right hand test!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp"
+        android:id="@+id/handTest"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        android:text="Total number of tests!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numTests"
+        android:layout_below="@+id/handTest"
+        android:layout_marginTop="78dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        android:text="You tapped 30 times!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/averageTaps"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:gravity="center"
+        />
+
+    <Button
+        android:text="Restart"
+        android:padding="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/restartButton"
+        android:layout_marginBottom="55dp"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:fontFamily="Roboto"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

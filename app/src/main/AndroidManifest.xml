@@ -15,8 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TapTestActivity" />
-        <activity android:name=".TapTestResultActivity"></activity>
+        <activity android:name=".tap.TapTestActivity" />
+        <activity android:name=".tap.TapTestResultActivity" />
+        <activity android:name=".tap.TapConfigActivity" />
+        <activity android:name=".spiral.SpiralTestActivity"></activity>
     </application>
 
 </manifest>
