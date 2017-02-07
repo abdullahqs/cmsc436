@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MSApp.iml" filepath="$PROJECT_DIR$/MSApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MultipleSclerosisTests.iml" filepath="$PROJECT_DIR$/MultipleSclerosisTests.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cmsc436.iml" filepath="$PROJECT_DIR$/cmsc436.iml" />
     </modules>
   </component>
 </project>
