@@ -1,12 +1,12 @@
 package com.ms.tests;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.ms.tests.tap.TapConfigActivity;
+import com.ms.tests.spiral.SpiralTestActivity;
 
 public class TestSelectionActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class TestSelectionActivity extends AppCompatActivity {
     //@Override
     public void onClick(View v) {
 
-        Intent i=new Intent(TestSelectionActivity.this, TapConfigActivity.class);
+        Intent i=new Intent(TestSelectionActivity.this, SpiralTestActivity.class);
         startActivity(i);
 
     }
