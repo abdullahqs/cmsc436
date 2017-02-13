@@ -12,12 +12,14 @@
     tools:context="com.ms.tests.spiral.SpiralTestActivity">
 
     <com.ms.tests.spiral.DrawingView
+        android:id="@+id/spiralTest"
         android:layout_width="match_parent"
         android:layout_height="400dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Finish" />
+        android:text="Finish"
+        android:onClick="onClick"/>
 
 </LinearLayout>
