@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.ms.tests.R;
-
 public class SpiralTestActivity extends AppCompatActivity {
 
     DrawingView dv ;
@@ -24,24 +22,17 @@ public class SpiralTestActivity extends AppCompatActivity {
         dv = new DrawingView(this);
         setContentView(dv);
         mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setDither(true);
-        mPaint.setColor(Color.GREEN);
+        mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(12);
-        setContentView(R.layout.activity_spiral_test);
+        mPaint.setStrokeWidth(10);
     }
 
     public class DrawingView extends View {
 
-        public int width;
-        public  int height;
         private Bitmap mBitmap;
         private Canvas mCanvas;
         private Path mPath;
-        private Paint   mBitmapPaint;
+        private Paint mBitmapPaint;
         Context context;
         private Paint circlePaint;
         private Path circlePath;
@@ -53,11 +44,8 @@ public class SpiralTestActivity extends AppCompatActivity {
             mBitmapPaint = new Paint(Paint.DITHER_FLAG);
             circlePaint = new Paint();
             circlePath = new Path();
-            circlePaint.setAntiAlias(true);
-            circlePaint.setColor(Color.BLUE);
-            circlePaint.setStyle(Paint.Style.STROKE);
-            circlePaint.setStrokeJoin(Paint.Join.MITER);
-            circlePaint.setStrokeWidth(4f);
+            circlePaint.setColor(Color.BLACK);
+            circlePaint.setStrokeWidth(2f);
         }
 
         @Override
@@ -94,7 +82,6 @@ public class SpiralTestActivity extends AppCompatActivity {
                 mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
                 mX = x;
                 mY = y;
-
                 circlePath.reset();
                 circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
             }
@@ -103,9 +90,7 @@ public class SpiralTestActivity extends AppCompatActivity {
         private void touch_up() {
             mPath.lineTo(mX, mY);
             circlePath.reset();
-            // commit the path to our offscreen
             mCanvas.drawPath(mPath,  mPaint);
-            // kill this so we don't double draw
             mPath.reset();
         }
 
