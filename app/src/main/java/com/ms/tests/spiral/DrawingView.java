@@ -9,9 +9,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
+import android.widget.ImageView;
 
 import com.ms.tests.R;
 
@@ -23,7 +22,7 @@ import java.io.IOException;
  * Created by Ramse on 2/13/2017.
  */
 
-public class DrawingView extends View {
+public class DrawingView extends ImageView {
 
     private Bitmap mBitmap;
     private Canvas mCanvas;
@@ -64,8 +63,16 @@ public class DrawingView extends View {
         circlePath = new Path();
         circlePaint.setColor(Color.BLACK);
         circlePaint.setStrokeWidth(2f);
+    }
 
-        spiral = BitmapFactory.decodeResource(getResources(), R.drawable.spiral);
+    private void createScaledSpiral(Canvas c){
+        Bitmap unscaledSpiral = BitmapFactory.decodeResource(getResources(), R.drawable.spiral);
+        float ratio = unscaledSpiral.getHeight() / unscaledSpiral.getWidth();
+        int targetWidth = c.getWidth();
+        int targetHeight = (int)(ratio * targetWidth);
+
+        spiral = Bitmap.createScaledBitmap(unscaledSpiral, targetWidth, targetHeight, false);
+        spiralY = c.getHeight()/2 - spiral.getHeight()/2;
     }
 
     @Override
@@ -74,17 +81,17 @@ public class DrawingView extends View {
 
         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
-
-        spiralX = w / 2 - spiral.getWidth() / 2;
-        spiralY = h / 2 - spiral.getHeight() / 2;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        if(spiral == null)
+            createScaledSpiral(canvas);
+
         canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(spiral, spiralX, spiralY, mBitmapPaint);
+        canvas.drawBitmap(spiral, 0, spiralY, mBitmapPaint);
         canvas.drawBitmap( mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath( mPath,  mPaint);
         canvas.drawPath( circlePath,  circlePaint);
