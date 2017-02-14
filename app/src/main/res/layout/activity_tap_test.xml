@@ -31,20 +31,17 @@
 
         <Button
             android:id="@+id/tap_test_area"
+            android:text="Tap the screen!"
+            android:textColor="#FFF"
+            android:textSize="30sp"
             android:background="@color/colorPrimaryDark"
-            android:layout_width="200dp"
-            android:layout_height="300dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"  />
 
-        <TextView
-            android:id="@+id/tap_count_view"
-            android:text="Taps: 0"
-            android:textSize="25sp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tap_test_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
     </RelativeLayout>
 
 

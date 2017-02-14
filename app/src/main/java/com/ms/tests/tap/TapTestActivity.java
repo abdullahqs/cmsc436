@@ -32,7 +32,6 @@ public class TapTestActivity extends AppCompatActivity {
     };
 
     private RelativeLayout _tapView;
-    private TextView _tapCountView;
     private TapTestResults _testResults;
     private int _testRound;
     private int _tapsCount = 0;
@@ -46,7 +45,6 @@ public class TapTestActivity extends AppCompatActivity {
         _testResults = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
         _testRound = i.getIntExtra(ROUND_KEY, 1);
 
-        _tapCountView = (TextView) findViewById(R.id.tap_count_view);
         _tapView = (RelativeLayout) findViewById(R.id.tap_view);
 
         final Button testArea = (Button) findViewById(R.id.tap_test_area);
@@ -55,7 +53,6 @@ public class TapTestActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     _tapsCount++;
-                    updateText();
                     testArea.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorPrimaryDark));
                 } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
                     testArea.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
@@ -82,10 +79,6 @@ public class TapTestActivity extends AppCompatActivity {
                 startTest();
             }
         }.start();
-    }
-
-    private void updateText(){
-        _tapCountView.setText("Taps: " + _tapsCount);
     }
 
     void startTest() {

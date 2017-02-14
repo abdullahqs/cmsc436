@@ -38,7 +38,7 @@
         />
 
     <TextView
-        android:text="You tapped 30 times!"
+        android:text="You tapped x times!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/averageTaps"
