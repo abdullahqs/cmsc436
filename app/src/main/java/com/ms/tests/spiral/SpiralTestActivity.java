@@ -42,12 +42,12 @@ public class SpiralTestActivity extends AppCompatActivity {
 
     public void onClick(View v) {
 
-        File file=new File(Environment.getExternalStorageDirectory()+"/ms/spiral");
+        File file=new File(Environment.getExternalStorageDirectory()+"/spiralTest");
         if(!file.isDirectory()){
             file.mkdir();
         }
 
-        file=new File(Environment.getExternalStorageDirectory()+"/ms/spiral",System.currentTimeMillis()+".jpg");
+        file=new File(Environment.getExternalStorageDirectory()+"/spiralTest",System.currentTimeMillis()+".jpg");
 
         try {
             FileOutputStream out = new FileOutputStream(file);
