@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_spiral_test"
     android:layout_width="match_parent"
@@ -11,18 +11,24 @@
     android:orientation="vertical"
     tools:context="com.ms.tests.spiral.SpiralTestActivity">
 
-    <com.ms.tests.spiral.DrawingView
-        android:id="@+id/spiralTest"
-        android:layout_width="match_parent"
-        android:layout_height="400dp" />
-
     <Button
+        android:id="@+id/finish_button"
         android:layout_gravity="bottom"
         android:padding="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:text="Finish Test"
         android:onClick="onSaveDrawing"/>
 
-</LinearLayout>
+    <com.ms.tests.spiral.DrawingView
+        android:background="@drawable/spiral"
+        android:layout_above="@id/finish_button"
+        android:id="@+id/spiralTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
