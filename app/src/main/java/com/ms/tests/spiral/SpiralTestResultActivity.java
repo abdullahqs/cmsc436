@@ -37,6 +37,7 @@ public class SpiralTestResultActivity extends AppCompatActivity {
                 if(mImageUri != null){
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.putExtra(Intent.EXTRA_STREAM, mImageUri);
+                    share.setType("image/jpeg");
                     startActivity(Intent.createChooser(share, "Share Results"));
                 }
             }
