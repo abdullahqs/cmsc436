@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,13 +18,13 @@ import android.util.Log;
 import android.view.View;
 
 import com.ms.tests.R;
-import com.ms.tests.TestSelectionActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Locale;
 
 public class SpiralTestActivity extends AppCompatActivity {
+    public static final String RESULT_IMAGE_URI = "result_image_uri";
     private static final int REQUEST_EXTERNAL_STORAGE = 0x1;
 
     private DrawingView dv;
@@ -71,14 +72,14 @@ public class SpiralTestActivity extends AppCompatActivity {
             file.mkdir();
         }
 
-        file=new File(Environment.getExternalStorageDirectory()+"/spiralTest",System.currentTimeMillis()+".jpg");
+        file = new File(Environment.getExternalStorageDirectory()+"/spiralTest",System.currentTimeMillis()+".jpg");
+        Uri fileUri = null;
 
         try {
             FileOutputStream out = new FileOutputStream(file);
             dv.getDrawingCache().compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
-
 
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.TITLE, "Spiral Test");
@@ -89,12 +90,16 @@ public class SpiralTestActivity extends AppCompatActivity {
             values.put("_data", file.getAbsolutePath());
 
             ContentResolver cr = getContentResolver();
-            cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            fileUri = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Intent i = new Intent(SpiralTestActivity.this, TestSelectionActivity.class);
+        Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
+
+        if(fileUri != null)
+            i.putExtra(RESULT_IMAGE_URI, fileUri);
+
         startActivity(i);
     }
 }
