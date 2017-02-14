@@ -8,6 +8,27 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.ms.tests.spiral.SpiralTestActivity">
+
+    <Button
+        android:id="@+id/finish_button"
+        android:layout_gravity="bottom"
+        android:padding="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Finish Test"
+        android:onClick="onSaveDrawing"/>
+
+    <com.ms.tests.spiral.DrawingView
+        android:background="@drawable/spiral"
+        android:layout_above="@id/finish_button"
+        android:id="@+id/spiralTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
