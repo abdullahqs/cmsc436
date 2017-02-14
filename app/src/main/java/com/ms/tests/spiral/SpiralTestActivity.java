@@ -1,22 +1,19 @@
 package com.ms.tests.spiral;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.ms.tests.R;
@@ -24,23 +21,50 @@ import com.ms.tests.TestSelectionActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Locale;
 
 public class SpiralTestActivity extends AppCompatActivity {
+    private static final int REQUEST_EXTERNAL_STORAGE = 0x1;
 
-    DrawingView dv;
+    private DrawingView dv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/*        dv = new DrawingView(this);
-        setContentView(dv);*/
 
         setContentView(R.layout.activity_spiral_test);
         dv = (DrawingView) findViewById(R.id.spiralTest);
+
+
     }
 
-    public void onClick(View v) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_EXTERNAL_STORAGE){
+            for(int i = 0; i < permissions.length; i++){
+                if(grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                    return;
+                Log.d(getClass().getSimpleName(), "Req'd " + permissions[i] + " with result: " + grantResults[i]);
+            }
+
+            saveBitmap();
+        }
+    }
+
+    public void onSaveDrawing(View v){
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+        }else {
+            saveBitmap();
+        }
+    }
+
+    public void saveBitmap() {
 
         File file=new File(Environment.getExternalStorageDirectory()+"/spiralTest");
         if(!file.isDirectory()){
