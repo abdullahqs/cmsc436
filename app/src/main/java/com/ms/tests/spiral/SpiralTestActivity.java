@@ -1,119 +1,76 @@
 package com.ms.tests.spiral;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.ms.tests.R;
+import com.ms.tests.TestSelectionActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Locale;
+
 public class SpiralTestActivity extends AppCompatActivity {
 
-    DrawingView dv ;
-    private Paint mPaint;
-
+    DrawingView dv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dv = new DrawingView(this);
-        setContentView(dv);
-        mPaint = new Paint();
-        mPaint.setColor(Color.RED);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(10);
+/*        dv = new DrawingView(this);
+        setContentView(dv);*/
+
+        setContentView(R.layout.activity_spiral_test);
+        dv = (DrawingView) findViewById(R.id.spiralTest);
     }
 
-    public class DrawingView extends View {
+    public void onClick(View v) {
 
-        private Bitmap mBitmap;
-        private Canvas mCanvas;
-        private Path mPath;
-        private Paint mBitmapPaint;
-        Context context;
-        private Paint circlePaint;
-        private Path circlePath;
-
-        public DrawingView(Context c) {
-            super(c);
-            context=c;
-            mPath = new Path();
-            mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-            circlePaint = new Paint();
-            circlePath = new Path();
-            circlePaint.setColor(Color.BLACK);
-            circlePaint.setStrokeWidth(2f);
+        File file=new File(Environment.getExternalStorageDirectory()+"/ms/spiral");
+        if(!file.isDirectory()){
+            file.mkdir();
         }
 
-        @Override
-        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-            super.onSizeChanged(w, h, oldw, oldh);
+        file=new File(Environment.getExternalStorageDirectory()+"/ms/spiral",System.currentTimeMillis()+".jpg");
 
-            mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-            mCanvas = new Canvas(mBitmap);
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            dv.getDrawingCache().compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+
+
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.TITLE, "Spiral Test");
+            values.put(MediaStore.Images.Media.DESCRIPTION, "Spiral Test for MS");
+            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis ());
+            values.put(MediaStore.Images.ImageColumns.BUCKET_ID, file.toString().toLowerCase(Locale.US).hashCode());
+            values.put(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME, file.getName().toLowerCase(Locale.US));
+            values.put("_data", file.getAbsolutePath());
+
+            ContentResolver cr = getContentResolver();
+            cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        @Override
-        protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-
-            canvas.drawBitmap( mBitmap, 0, 0, mBitmapPaint);
-            canvas.drawPath( mPath,  mPaint);
-            canvas.drawPath( circlePath,  circlePaint);
-        }
-
-        private float mX, mY;
-        private static final float TOUCH_TOLERANCE = 4;
-
-        private void touch_start(float x, float y) {
-            mPath.reset();
-            mPath.moveTo(x, y);
-            mX = x;
-            mY = y;
-        }
-
-        private void touch_move(float x, float y) {
-            float dx = Math.abs(x - mX);
-            float dy = Math.abs(y - mY);
-            if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-                mPath.quadTo(mX, mY, (x + mX)/2, (y + mY)/2);
-                mX = x;
-                mY = y;
-                circlePath.reset();
-                circlePath.addCircle(mX, mY, 30, Path.Direction.CW);
-            }
-        }
-
-        private void touch_up() {
-            mPath.lineTo(mX, mY);
-            circlePath.reset();
-            mCanvas.drawPath(mPath,  mPaint);
-            mPath.reset();
-        }
-
-        @Override
-        public boolean onTouchEvent(MotionEvent event) {
-            float x = event.getX();
-            float y = event.getY();
-
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    touch_start(x, y);
-                    invalidate();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    touch_move(x, y);
-                    invalidate();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    touch_up();
-                    invalidate();
-                    break;
-            }
-            return true;
-        }
+        Intent i = new Intent(SpiralTestActivity.this, TestSelectionActivity.class);
+        startActivity(i);
     }
 }
