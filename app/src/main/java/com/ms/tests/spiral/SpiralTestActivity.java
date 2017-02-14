@@ -98,7 +98,7 @@ public class SpiralTestActivity extends AppCompatActivity {
         Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
 
         if(fileUri != null)
-            i.putExtra(RESULT_IMAGE_URI, fileUri);
+            i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
 
         startActivity(i);
     }
