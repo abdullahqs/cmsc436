@@ -58,6 +58,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textSize="50sp"
+        android:onClick="onLevelClick"
         android:fontFamily="Roboto"
         android:background="#BFD7EA"
         android:textColor="#000000"
