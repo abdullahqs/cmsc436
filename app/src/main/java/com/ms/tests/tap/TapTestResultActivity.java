@@ -21,6 +21,8 @@ public class TapTestResultActivity extends AppCompatActivity {
         TextView numTests = (TextView) findViewById(R.id.numTests);
         TextView averageTaps = (TextView) findViewById(R.id.averageTaps);
 
+        Button mButton = (Button) findViewById(R.id.share_button);
+
         Intent i = getIntent();
         TapTestResults results = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
 
@@ -32,6 +34,23 @@ public class TapTestResultActivity extends AppCompatActivity {
         handTest.setText(results.isLeftHand ? "Left hand test" : "Right hand test" );
         numTests.setText("Ran a total of: " + results.numTests + " test" + (results.numTests > 1 ? "s" : "") + ".");
         averageTaps.setText("Average of: " + (totalNumTaps / results.numTests) + " taps per test.");
+
+        final String shareString = ((results.isLeftHand ? "Left Hand Test\n" : "Right Hand Test\n") + "Ran a total of " + results.numTests + " test\n" + (results.numTests > 1 ? "s" : "") + ".\n" + "Average of: " + (totalNumTaps / results.numTests) + " taps per test.");
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (shareString != null) {
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.putExtra(Intent.EXTRA_TEXT, shareString);
+                    share.setType("text/plain");
+                    startActivity(Intent.createChooser(share, "Share Results"));
+
+                }
+            }
+        });
+
+
 
         final Button button = (Button) findViewById(R.id.restartButton);
         button.setOnClickListener(new View.OnClickListener() {

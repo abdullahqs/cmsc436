@@ -38,6 +38,8 @@ public class TapTestResults implements Parcelable {
         dest.writeIntArray(testResults);
     }
 
+
+
     public static final Parcelable.Creator<TapTestResults> CREATOR = new Parcelable.Creator<TapTestResults>() {
         public TapTestResults createFromParcel(Parcel data) {
             return new TapTestResults(data);
