@@ -47,10 +47,10 @@
         />
 
     <Button
-        android:text="Spider Test"
+        android:text="Level Test"
         android:layout_width="wrap_content"
         android:layout_height="250px"
-        android:id="@+id/spiderButton"
+        android:id="@+id/levelButton"
         android:layout_below="@+id/spiralButton"
         android:layout_marginTop="16dp"
         android:layout_alignParentLeft="true"
