@@ -36,10 +36,10 @@
         android:id="@+id/level_results_share_button" />
 
     <ImageView
-        android:layout_below="@id/test_finished_text"
+        android:layout_below="@id/level_results_test_finished_text"
         android:id="@+id/level_results_result_preview"
         android:scaleType="fitCenter"
-        android:layout_above="@id/share_button"
+        android:layout_above="@id/level_results_share_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

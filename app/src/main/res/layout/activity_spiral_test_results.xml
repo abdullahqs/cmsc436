@@ -12,7 +12,7 @@
 
     <TextView
         android:layout_centerInParent="true"
-        android:id="@+id/test_finished_text"
+        android:id="@+id/spiral_results_test_finished_text"
         android:textSize="20sp"
         android:text="Thanks for taking the spiral test!"
         android:layout_width="wrap_content"
@@ -32,13 +32,13 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/share_button" />
+        android:id="@+id/spiral_results_share_button" />
 
     <ImageView
-        android:layout_below="@id/test_finished_text"
-        android:id="@+id/result_preview"
+        android:layout_below="@id/spiral_results_test_finished_text"
+        android:id="@+id/spiral_results_result_preview"
         android:scaleType="fitCenter"
-        android:layout_above="@id/share_button"
+        android:layout_above="@id/spiral_results_share_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

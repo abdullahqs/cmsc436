@@ -20,8 +20,8 @@ public class SpiralTestResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spiral_test_results);
 
-        mButton = (Button) findViewById(R.id.share_button);
-        mResultView = (ImageView) findViewById(R.id.result_preview);
+        mButton = (Button) findViewById(R.id.spiral_results_share_button);
+        mResultView = (ImageView) findViewById(R.id.spiral_results_result_preview);
 
         Intent i = getIntent();
 

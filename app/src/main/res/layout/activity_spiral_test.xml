@@ -12,7 +12,7 @@
     tools:context="com.ms.tests.spiral.SpiralTestActivity">
 
     <Button
-        android:id="@+id/finish_button"
+        android:id="@+id/spiral_test_finish_button"
         android:layout_gravity="bottom"
         android:padding="25dp"
         android:layout_width="match_parent"
@@ -26,8 +26,8 @@
 
     <com.ms.tests.spiral.DrawingView
         android:background="@drawable/spiral"
-        android:layout_above="@id/finish_button"
-        android:id="@+id/spiralTest"
+        android:layout_above="@id/spiral_test_finish_button"
+        android:id="@+id/spiral_test_drawing_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
