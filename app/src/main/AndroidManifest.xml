@@ -23,7 +23,8 @@
         <activity android:name=".tap.TapConfigActivity" />
         <activity android:name=".spiral.SpiralTestActivity" />
         <activity android:name=".spiral.SpiralTestResultActivity" />
-        <activity android:name=".level.LevelTest"></activity>
+        <activity android:name=".level.LevelTest" />
+        <activity android:name=".level.LevelTestResultsActivity"></activity>
     </application>
 
 </manifest>
