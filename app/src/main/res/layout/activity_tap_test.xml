@@ -31,15 +31,20 @@
 
         <Button
             android:id="@+id/tap_test_area"
-            android:text="Tap the screen!"
-            android:textColor="#FFF"
-            android:textSize="30sp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@android:color/transparent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentBottom="true"
+            android:layout_height="fill_parent"  />
+
+        <ImageView
+            android:id="@+id/tap_image"
+            android:src="@drawable/balloon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:scaleX=".25"
+            android:scaleY=".25"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"  />
+            android:layout_centerVertical="true"/>
 
 
     </RelativeLayout>
