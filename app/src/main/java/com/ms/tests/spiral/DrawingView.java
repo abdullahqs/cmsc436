@@ -17,6 +17,7 @@ import com.ms.tests.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Ramse on 2/13/2017.
@@ -35,6 +36,16 @@ public class DrawingView extends ImageView {
 
     private Bitmap spiral;
     private int spiralX, spiralY;
+
+    class Pair {
+        double x;
+        double y;
+
+        public Pair(double x, double y){
+            this.x = x;
+            this.y = y;
+        }
+    }
 
     public DrawingView(Context context) {
         super(context);
@@ -172,5 +183,22 @@ public class DrawingView extends ImageView {
             }
         }
         return true;
+    }
+
+    public double calculateScore(ArrayList<Pair> inputPoints, ArrayList<Pair> fixedPoints){
+        double agg = 0;
+        double currentDeviation = 999999;
+
+        for (Pair p: inputPoints){
+            for (Pair fp: fixedPoints){
+                currentDeviation = Math.min(currentDeviation, Math.sqrt(Math.pow((p.x - fp.x),2) + Math.pow((p.y - fp.y),2)));
+            }
+            agg += currentDeviation;
+            currentDeviation = 999999;
+        }
+
+        // Standarizing based on number of points inputted. 
+        return agg/inputPoints.size();
+
     }
 }
