@@ -29,9 +29,11 @@ public class TapTestResultActivity extends AppCompatActivity {
             totalNumTaps += results.testResults[k];
         }
 
+        results.setValue(totalNumTaps/results.numTests);
+
         handTest.setText(results.isLeftHand ? "Left hand test" : "Right hand test" );
         numTests.setText("Ran a total of: " + results.numTests + " test" + (results.numTests > 1 ? "s" : "") + ".");
-        averageTaps.setText("Average of: " + (totalNumTaps / results.numTests) + " taps per test.");
+        averageTaps.setText("Average of: " + (results.getValue()) + " taps per test.");
 
         final Button button = (Button) findViewById(R.id.restartButton);
         button.setOnClickListener(new View.OnClickListener() {

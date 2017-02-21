@@ -10,6 +10,9 @@ import android.widget.RadioButton;
 
 import com.ms.tests.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class TapConfigActivity extends AppCompatActivity {
 
     @Override
@@ -35,8 +38,11 @@ public class TapConfigActivity extends AppCompatActivity {
                 if(rightButton.isChecked()){
                     isleft = false;
                 }
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                String date = df.format(c.getTime());
 
-                TapTestResults result = new TapTestResults(isleft, numTests);
+                TapTestResults result = new TapTestResults(isleft,numTests,0,date);
 
                 Intent i=new Intent(TapConfigActivity.this, TapTestActivity.class);
                 i.putExtra(TapTestResults.RESULTS_KEY, result);
