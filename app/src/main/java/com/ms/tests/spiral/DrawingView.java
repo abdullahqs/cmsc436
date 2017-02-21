@@ -42,6 +42,16 @@ public class DrawingView extends ImageView {
     private int spiralY;
     private Point[] spiralPoints;
 
+    class Pair {
+        double x;
+        double y;
+
+        public Pair(double x, double y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     public DrawingView(Context context) {
         super(context);
 
@@ -232,10 +242,20 @@ public class DrawingView extends ImageView {
         return true;
     }
 
-    public float CalculateScore() {
-        // spiralPoints - all the points attached to the spiral
-        // userPoints - all the points the user tapped
+    public double calculateScore(ArrayList<Pair> inputPoints, ArrayList<Pair> fixedPoints){
+        double agg = 0;
+        double currentDeviation = 999999;
 
-        return 1.0f;
+        for (Pair p: inputPoints){
+            for (Pair fp: fixedPoints){
+                currentDeviation = Math.min(currentDeviation, Math.sqrt(Math.pow((p.x - fp.x),2) + Math.pow((p.y - fp.y),2)));
+            }
+            agg += currentDeviation;
+            currentDeviation = 999999;
+        }
+
+        // Standarizing based on number of points inputted.
+        return agg/inputPoints.size();
+
     }
 }
