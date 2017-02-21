@@ -33,7 +33,7 @@ import java.util.Locale;
 public class LevelTestActivity extends AppCompatActivity implements SensorEventListener {
     public static final String RESULT_IMAGE_URI = "result_image_uri";
     private static final int REQUEST_EXTERNAL_STORAGE = 0x2;
-    private static final double MIN_THRESHOLD = 1.5;
+    private static final double MIN_THRESHOLD = 0.5;
     private final static String TAG = "LevelTestActivity";
 
     private float[] mGravity;
