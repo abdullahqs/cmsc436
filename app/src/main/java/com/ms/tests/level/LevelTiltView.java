@@ -18,7 +18,7 @@ import com.ms.tests.R;
  */
 
 public class LevelTiltView extends View {
-    private static final double BALL_SENSITIVITY = 0.026;
+    private static final double BALL_SENSITIVITY = 0.03;
     private static final double BALL_RADIUS = 50;
 
     private boolean mActive;
