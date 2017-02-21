@@ -1,27 +1,29 @@
-package com.ms.tests.spiral;
+package com.ms.tests.level;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.ms.tests.R;
+import com.ms.tests.spiral.SpiralTestActivity;
 
-public class SpiralTestResultActivity extends AppCompatActivity {
+public class LevelTestResultsActivity extends AppCompatActivity {
     private Button mButton;
     private ImageView mResultView;
     private Uri mImageUri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spiral_test_results);
+        setContentView(R.layout.activity_level_test_results);
 
-        mButton = (Button) findViewById(R.id.spiral_results_share_button);
-        mResultView = (ImageView) findViewById(R.id.spiral_results_result_preview);
+        mButton = (Button) findViewById(R.id.level_results_share_button);
+        mResultView = (ImageView) findViewById(R.id.level_results_result_preview);
 
         Intent i = getIntent();
 

@@ -34,9 +34,8 @@ public class SpiralTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_spiral_test);
-        dv = (DrawingView) findViewById(R.id.spiralTest);
 
-
+        dv = (DrawingView) findViewById(R.id.spiral_test_drawing_view);
     }
 
     @Override
