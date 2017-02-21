@@ -27,7 +27,7 @@ public class LevelTestResultsActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        String resultImage = i.getStringExtra(SpiralTestActivity.RESULT_IMAGE_URI);
+        String resultImage = i.getStringExtra(LevelTestActivity.RESULT_IMAGE_URI);
         if(resultImage != null) {
             mImageUri = Uri.parse(resultImage);
             mResultView.setImageURI(mImageUri);

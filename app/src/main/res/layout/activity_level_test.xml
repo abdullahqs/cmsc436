@@ -8,6 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ms.tests.level.LevelTest">
+    tools:context="com.ms.tests.level.LevelTestActivity">
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:id="@+id/degree_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/start_level_test"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Start Test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ms.tests.level.LevelTiltView
+        android:id="@+id/tilt_view"
+        android:layout_above="@id/start_level_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
