@@ -69,8 +69,6 @@ public class SpiralTestActivity extends AppCompatActivity {
     }
 
     public void saveMetric() {
-
-
         double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
 
         Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);

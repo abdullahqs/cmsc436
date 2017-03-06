@@ -27,7 +27,14 @@ public class SpiralTestResultActivity extends AppCompatActivity {
         mResultView = (ImageView) findViewById(R.id.spiral_results_result_preview);
         mTextView = (TextView) findViewById(R.id.score);
 
+
         Intent i = getIntent();
+
+        Double score = i.getDoubleExtra("SpiralMetric",0);
+        int scoreInt = score.intValue();
+        final String scoreString = Integer.toString(scoreInt);
+        mTextView.setText(scoreString);
+
 
         String resultImage = i.getStringExtra(SpiralTestActivity.RESULT_IMAGE_URI);
         if(resultImage != null) {
@@ -42,21 +49,12 @@ public class SpiralTestResultActivity extends AppCompatActivity {
                 if(mImageUri != null){
                     Intent share = new Intent(Intent.ACTION_SEND);
                     share.putExtra(Intent.EXTRA_STREAM, mImageUri);
+                    share.putExtra(Intent.EXTRA_TEXT,"I scored "+scoreString+" out of 100.");
                     share.setType("image/jpeg");
                     startActivity(Intent.createChooser(share, "Share Results"));
                 }
             }
         });
-
-
-        Double score = i.getDoubleExtra("SpiralMetric",0);
-        int scoreInt = score.intValue();
-        String scoreString = Integer.toString(scoreInt);
-        mTextView.setText(scoreString);
-
-
-
-
 
     }
 }
