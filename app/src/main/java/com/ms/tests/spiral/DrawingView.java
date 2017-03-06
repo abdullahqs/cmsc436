@@ -116,6 +116,7 @@ public class DrawingView extends ImageView {
         spiralPoints[31] = new Point(105, 125);
     }
 
+
     private void createScaledSpiral(Canvas c){
         Bitmap unscaledSpiral = BitmapFactory.decodeResource(getResources(), R.drawable.spiral);
         float ratio = unscaledSpiral.getHeight() / unscaledSpiral.getWidth();
@@ -134,6 +135,27 @@ public class DrawingView extends ImageView {
             spiralPoints[i].y += spiralY;
         }
     }
+
+    public ArrayList<Pair> getUserPoints(){
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        for(PointF point :this.userPoints){
+            Pair pair = new Pair(point.x,point.y);
+            pairs.add(pair);
+        }
+        return pairs;
+    }
+
+    public ArrayList<Pair> getFixedPoints(){
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        for(Point point :this.spiralPoints){
+            Pair pair = new Pair(point.x,point.y);
+            pairs.add(pair);
+        }
+        return pairs;
+    }
+
+
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
