@@ -10,6 +10,10 @@ import android.widget.ImageView;
 
 import com.ms.tests.R;
 import com.ms.tests.spiral.SpiralTestActivity;
+import com.ms.tests.spiral.SpiralTestResults;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class LevelTestResultsActivity extends AppCompatActivity {
     private Button mButton;
@@ -32,6 +36,14 @@ public class LevelTestResultsActivity extends AppCompatActivity {
             mImageUri = Uri.parse(resultImage);
             mResultView.setImageURI(mImageUri);
         }
+
+        int calculation = 0;
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String date = df.format(c.getTime());
+
+        LevelTestResults result = new LevelTestResults(calculation,date);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override

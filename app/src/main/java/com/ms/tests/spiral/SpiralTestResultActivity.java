@@ -13,6 +13,9 @@ import com.ms.tests.R;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class SpiralTestResultActivity extends AppCompatActivity {
     private Button mButton;
     private ImageView mResultView;
@@ -34,6 +37,12 @@ public class SpiralTestResultActivity extends AppCompatActivity {
         int scoreInt = score.intValue();
         final String scoreString = Integer.toString(scoreInt);
         mTextView.setText(scoreString);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String date = df.format(c.getTime());
+
+        SpiralTestResults result = new SpiralTestResults(scoreInt,date);
 
 
         String resultImage = i.getStringExtra(SpiralTestActivity.RESULT_IMAGE_URI);
