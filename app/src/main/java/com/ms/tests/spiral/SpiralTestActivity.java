@@ -51,7 +51,7 @@ public class SpiralTestActivity extends AppCompatActivity {
             }
 
             saveBitmap();
-            saveMetric();
+            //saveMetric();
         }
     }
 
@@ -64,17 +64,17 @@ public class SpiralTestActivity extends AppCompatActivity {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
         }else {
             saveBitmap();
-            saveMetric();
+            //saveMetric();
         }
     }
 
-    public void saveMetric() {
-        double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
-
-        Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
-        i.putExtra("SpiralMetric", result);
-        startActivity(i);
-    }
+//    public void saveMetric() {
+//        double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
+//
+//        Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
+//        i.putExtra("SpiralMetric", result);
+//        startActivity(i);
+//    }
 
     public void saveBitmap() {
 
@@ -111,6 +111,14 @@ public class SpiralTestActivity extends AppCompatActivity {
         if(fileUri != null)
             i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
 
+        //startActivity(i);
+
+        double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
+
+        //Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
+        i.putExtra("SpiralMetric", result);
         startActivity(i);
     }
+
+
 }
