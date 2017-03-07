@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.ms.tests.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class SpiralTestActivity extends AppCompatActivity {
@@ -49,6 +51,7 @@ public class SpiralTestActivity extends AppCompatActivity {
             }
 
             saveBitmap();
+            //saveMetric();
         }
     }
 
@@ -61,8 +64,17 @@ public class SpiralTestActivity extends AppCompatActivity {
                             Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
         }else {
             saveBitmap();
+            //saveMetric();
         }
     }
+
+//    public void saveMetric() {
+//        double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
+//
+//        Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
+//        i.putExtra("SpiralMetric", result);
+//        startActivity(i);
+//    }
 
     public void saveBitmap() {
 
@@ -99,6 +111,14 @@ public class SpiralTestActivity extends AppCompatActivity {
         if(fileUri != null)
             i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
 
+        //startActivity(i);
+
+        double result = dv.calculateScore(dv.getUserPoints(), dv.getFixedPoints());
+
+        //Intent i = new Intent(SpiralTestActivity.this, SpiralTestResultActivity.class);
+        i.putExtra("SpiralMetric", result);
         startActivity(i);
     }
+
+
 }
