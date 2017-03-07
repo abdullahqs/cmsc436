@@ -276,8 +276,12 @@ public class DrawingView extends ImageView {
             currentDeviation = 999999;
         }
 
+        double score = agg/inputPoints.size();
+        score = (500 - score)/5;
+        return score;
+
         // Standarizing based on number of points inputted.
-        return agg/inputPoints.size();
+        //return agg/inputPoints.size();
 
     }
 }
