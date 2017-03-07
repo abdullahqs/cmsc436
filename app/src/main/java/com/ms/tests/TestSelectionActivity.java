@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.ms.tests.bubble.BubbleTestActivity;
 import com.ms.tests.level.LevelTestActivity;
 import com.ms.tests.spiral.SpiralTestActivity;
 import com.ms.tests.tap.TapConfigActivity;
@@ -34,6 +35,11 @@ public class TestSelectionActivity extends AppCompatActivity {
 
     public void onLevelClick(View v) {
         Intent i = new Intent(TestSelectionActivity.this, LevelTestActivity.class);
+        startActivity(i);
+    }
+
+    public void onBubbleClick(View v) {
+        Intent i = new Intent(TestSelectionActivity.this, BubbleTestActivity.class);
         startActivity(i);
     }
 }
