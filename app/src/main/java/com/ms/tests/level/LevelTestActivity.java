@@ -109,8 +109,12 @@ public class LevelTestActivity extends AppCompatActivity implements SensorEventL
                 return;
         }
 
-        if (mGravity == null || mGeomagnetic == null) {
-            Log.w(TAG, "mGravity or mGeomagnetic is null");
+        if (mGravity == null) {
+            Log.w(TAG, "mGravity is null");
+            return;
+        }
+        if (mGeomagnetic == null) {
+            Log.w(TAG, "mGeomagnetic is null");
             return;
         }
 
