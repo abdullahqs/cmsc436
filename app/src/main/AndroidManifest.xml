@@ -26,9 +26,10 @@
         <activity android:name=".bubble.BubbleTestActivity" />
         <activity android:name=".bubble.BubbleTestResultsActivity" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".level.LevelTestActivity" />
-        <activity android:name=".level.LevelTestResultsActivity"></activity>
+            android:name=".level.LevelTestActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".level.LevelTestResultsActivity" />
+        <activity android:name=".rotation.RotationTestActivity"></activity>
     </application>
 
 </manifest>
