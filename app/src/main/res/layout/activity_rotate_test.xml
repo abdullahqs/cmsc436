@@ -20,7 +20,7 @@
         android:id="@+id/startandend" />
 
     <Button
-        android:text="RotateTest"
+        android:text="Complete 10 Reps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
