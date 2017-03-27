@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ms.tests.R;
@@ -71,9 +72,22 @@ public class RotateTestCalibrationActivity extends AppCompatActivity implements 
                 mStart.setText("Calibrate the End Point");
                 mStart.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
+
+
+                        RadioButton armButton, legButton;
+
+                        legButton = (RadioButton) findViewById(R.id.leg_mode);
+                        armButton = (RadioButton) findViewById(R.id.arm_mode);
+
+                        boolean isArm = true;
+                        if(legButton.isChecked()){
+                            isArm = false;
+                        }
+
                         pitchrolls[2] = pitchDeg;
                         pitchrolls[3] = rollDeg;
                         Intent i = new Intent(RotateTestCalibrationActivity.this, RotateTestActivity.class);
+                        i.putExtra(RotateTestResults.MODE_KEY,isArm);
                         i.putExtra(RotateTestResults.KEY, pitchrolls);
                         startActivity(i);
                     }

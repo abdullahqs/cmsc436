@@ -6,5 +6,6 @@ package com.ms.tests.rotation;
 
 public class RotateTestResults {
     static String KEY = "Rotate_Results";
-    static String RESULT_KEY = "Rotate Array";
+    static String RESULT_KEY = "Rotate_Array";
+    static String MODE_KEY = "Rotate_Mode";
 }
