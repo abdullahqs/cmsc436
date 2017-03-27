@@ -27,6 +27,10 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
     boolean listened;
     int counter;
+    int process;
+    int temptime;
+
+
 
 
     private Sensor mAccel;
@@ -59,17 +63,26 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
         Intent i = getIntent();
         startend = i.getStringExtra(RotateTestResults.KEY);
         display = (TextView) findViewById(R.id.startandend);
-        display.setText(startend);
+
+        listened = false;
+        counter = 0;
+        process = 0;
+        temptime = 0;
+        String out = ""+counter;
+        display.setText(out);
+
 
 //        String[] out = startend.split(",");
 //        startcoord[0] = Integer.parseInt(out[0]);
 //        startcoord[1] = Integer.parseInt(out[1]);
 //        endcoord[0] = Integer.parseInt(out[2]);
 //        endcoord[1] = Integer.parseInt(out[3]);
-//        repTime = new int[10];
+        repTime = new int[10];
 
         listened = false;
         counter = 0;
+        process = 0;
+        temptime = 0;
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccel = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -86,10 +99,13 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
         mStart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(RotateTestActivity.this, RotateResultActivity.class);
-                String temp = ""+counter;
-                i.putExtra(RotateTestResults.KEY, temp);
-                startActivity(i);
+                if(counter == 10) {
+                    Intent i = new Intent(RotateTestActivity.this, RotateResultActivity.class);
+                    String temp = "" + counter;
+                    i.putExtra(RotateTestResults.RESULT_KEY, repTime);
+                    i.putExtra(RotateTestResults.KEY, temp);
+                    startActivity(i);
+                }
 
             }
         });
@@ -161,14 +177,29 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
         int pitchDeg = -1* scaleAngle(pitch);
 
         Log.v(TAG, String.format("%d, %d", rollDeg, pitchDeg));
-
-        if(!listened && rollDeg <= -170 && pitchDeg <= -10){
-            listened = true;
-        } else if(listened && rollDeg >= -10 && pitchDeg >= -10){
-            listened = false;
-            counter += 1;
+        if(counter <= 9) {
+            if (!listened && rollDeg <= -170 && pitchDeg <= -10 && process == 0) {
+                listened = true;
+                process += 1;
+                double temp = System.currentTimeMillis() / 1000;
+                temptime = (int) Math.floor(temp);
+            } else if (listened && rollDeg >= -10 && pitchDeg >= -10 && process == 1) {
+                listened = false;
+                process += 1;
+            } else if (!listened && rollDeg <= -170 && pitchDeg <= -10 && process == 2) {
+                double end = System.currentTimeMillis() / 1000;
+                int endsec = (int) Math.floor(end);
+                temptime = endsec - temptime;
+                repTime[counter] = temptime;
+                counter += 1;
+                process = 0;
+                temptime = 0;
+                String out = ""+counter;
+                display.setText(out);
+            }
+        } else {
+            return;
         }
-
 
 
     }

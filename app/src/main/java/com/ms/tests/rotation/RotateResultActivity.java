@@ -21,8 +21,15 @@ public class RotateResultActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String temp = i.getStringExtra(RotateTestResults.KEY);
+        int[] out = i.getIntArrayExtra(RotateTestResults.RESULT_KEY);
+        int average = 0;
+        for(int index = 0;index<out.length;index++){
+            average += out[index];
+        }
+        average = average/out.length;
+        String avg_str = ""+average;
         display = (TextView) findViewById(R.id.output);
-        display.setText(temp);
+        display.setText(avg_str);
 
 
 
