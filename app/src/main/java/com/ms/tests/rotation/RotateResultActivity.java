@@ -20,14 +20,13 @@ public class RotateResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rotate_result);
 
         Intent i = getIntent();
-        String temp = i.getStringExtra(RotateTestResults.KEY);
         int[] out = i.getIntArrayExtra(RotateTestResults.RESULT_KEY);
         int average = 0;
         for(int index = 0;index<out.length;index++){
             average += out[index];
         }
         average = average/out.length;
-        String avg_str = ""+average;
+        String avg_str = "On average, it took: "+average + " seconds to complete each rep.";
         display = (TextView) findViewById(R.id.output);
         display.setText(avg_str);
 

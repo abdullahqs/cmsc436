@@ -6,7 +6,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,9 +29,6 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
     int process;
     int temptime;
 
-
-
-
     private Sensor mAccel;
     private Sensor mMagnet;
     String start;
@@ -42,16 +38,9 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
     private float[] mGeomagnetic;
 
 
-    String startend;
+    int[] startend;
     TextView display;
-    int[] startcoord;
-    int[] endcoord;
     int[] repTime;
-
-    Button btn1;
-    Button btn2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +50,8 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
 
         Intent i = getIntent();
-        startend = i.getStringExtra(RotateTestResults.KEY);
+        startend = i.getIntArrayExtra(RotateTestResults.KEY);
+
         display = (TextView) findViewById(R.id.startandend);
 
         listened = false;
@@ -71,12 +61,6 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
         String out = ""+counter;
         display.setText(out);
 
-
-//        String[] out = startend.split(",");
-//        startcoord[0] = Integer.parseInt(out[0]);
-//        startcoord[1] = Integer.parseInt(out[1]);
-//        endcoord[0] = Integer.parseInt(out[2]);
-//        endcoord[1] = Integer.parseInt(out[3]);
         repTime = new int[10];
 
         listened = false;
@@ -178,15 +162,15 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
         Log.v(TAG, String.format("%d, %d", rollDeg, pitchDeg));
         if(counter <= 9) {
-            if (!listened && rollDeg <= -170 && pitchDeg <= -10 && process == 0) {
+            if (!listened && rollDeg <= startend[1] && pitchDeg <= startend[0] && process == 0) {
                 listened = true;
                 process += 1;
                 double temp = System.currentTimeMillis() / 1000;
                 temptime = (int) Math.floor(temp);
-            } else if (listened && rollDeg >= -10 && pitchDeg >= -10 && process == 1) {
+            } else if (listened && rollDeg >= startend[3] && pitchDeg >= startend[2] && process == 1) {
                 listened = false;
                 process += 1;
-            } else if (!listened && rollDeg <= -170 && pitchDeg <= -10 && process == 2) {
+            } else if (!listened && rollDeg <= startend[1] && pitchDeg <= startend[0] && process == 2) {
                 double end = System.currentTimeMillis() / 1000;
                 int endsec = (int) Math.floor(end);
                 temptime = endsec - temptime;

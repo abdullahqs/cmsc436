@@ -22,10 +22,16 @@ public class RotateTestCalibrationActivity extends AppCompatActivity implements 
     private static final double MIN_THRESHOLD = 0.5;
 
 
+    int[] pitchrolls;
+    public int pitchDeg;
+    public int rollDeg;
+
     private Sensor mAccel;
     private Sensor mMagnet;
     String start;
     String end;
+
+
 
     private float[] mGravity;
     private float[] mGeomagnetic;
@@ -42,6 +48,9 @@ public class RotateTestCalibrationActivity extends AppCompatActivity implements 
         mStart = (Button) findViewById(R.id.start_rotate_test);
         mTitle = (TextView) findViewById(R.id.startend);
         mDegreeView = (TextView) findViewById(R.id.level);
+        pitchrolls = new int[4];
+        pitchDeg = 0;
+        rollDeg = 0;
 
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -57,17 +66,16 @@ public class RotateTestCalibrationActivity extends AppCompatActivity implements 
 
         mStart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                start = (String)mDegreeView.getText();
-                mStart.setText("calibrate");
-                mTitle.setText("Calibrate the End Point");
+                pitchrolls[0] = pitchDeg;
+                pitchrolls[1] = rollDeg;
+                mStart.setText("Calibrate the End Point");
                 mStart.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
-                        end = (String) mDegreeView.getText();
-                        String out = start +"," + end;
+                        pitchrolls[2] = pitchDeg;
+                        pitchrolls[3] = rollDeg;
                         Intent i = new Intent(RotateTestCalibrationActivity.this, RotateTestActivity.class);
-                        i.putExtra(RotateTestResults.KEY, out);
+                        i.putExtra(RotateTestResults.KEY, pitchrolls);
                         startActivity(i);
-
                     }
                 });
             }
@@ -136,10 +144,10 @@ public class RotateTestCalibrationActivity extends AppCompatActivity implements 
         // Orientation contains: azimuth, pitch and roll - we'll use roll
         float pitch = orientation[1];
         float roll = orientation[2];
-        int rollDeg = scaleAngle(roll);
-        int pitchDeg = -1* scaleAngle(pitch);
+        rollDeg = scaleAngle(roll);
+        pitchDeg = -1* scaleAngle(pitch);
 
-        Log.v(TAG, String.format("%d, %d", rollDeg, pitchDeg));
+        Log.v(TAG, String.format("%d, %d", pitchDeg,rollDeg));
         mDegreeView.setText(String.format("%d, %d", pitchDeg, rollDeg));
     }
 

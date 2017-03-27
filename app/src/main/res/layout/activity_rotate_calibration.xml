@@ -14,7 +14,7 @@
         android:id="@+id/start_rotate_test"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="calibrate"
+        android:text="Calibrate the Start Point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -28,11 +28,11 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Calibrate the Starting Point"
+        android:text="Calibrate the Start and End Points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:id="@+id/startend"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
