@@ -29,8 +29,9 @@
             android:name=".level.LevelTestActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".level.LevelTestResultsActivity" />
-        <activity android:name=".rotation.RotationTestCalibrationActivity" />
-        <activity android:name=".rotation.RotateTestActivity"></activity>
+        <activity android:name=".rotation.RotateTestCalibrationActivity" />
+        <activity android:name=".rotation.RotateTestActivity" />
+        <activity android:name=".rotation.RotateResultActivity"></activity>
     </application>
 
 </manifest>

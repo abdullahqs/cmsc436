@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.ms.tests.R;
 
 
-public class RotationTestCalibrationActivity extends AppCompatActivity implements SensorEventListener {
+public class RotateTestCalibrationActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager mSensorManager;
     private final static String TAG = "CalibrationActivity";
     private static final double MIN_THRESHOLD = 0.5;
@@ -37,7 +37,7 @@ public class RotationTestCalibrationActivity extends AppCompatActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rotation_calibration);
+        setContentView(R.layout.activity_rotate_calibration);
 
         mStart = (Button) findViewById(R.id.start_rotate_test);
         mTitle = (TextView) findViewById(R.id.startend);
@@ -63,11 +63,9 @@ public class RotationTestCalibrationActivity extends AppCompatActivity implement
                 mStart.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
                         end = (String) mDegreeView.getText();
-                        mStart.setText("Stop Test");
-                        mTitle.setText("Begin Moving Limb");
                         String out = start +"," + end;
-                        Intent i = new Intent(RotationTestCalibrationActivity.this, RotateTestActivity.class);
-                        i.putExtra(RotationTestResults.KEY, out);
+                        Intent i = new Intent(RotateTestCalibrationActivity.this, RotateTestActivity.class);
+                        i.putExtra(RotateTestResults.KEY, out);
                         startActivity(i);
 
                     }
