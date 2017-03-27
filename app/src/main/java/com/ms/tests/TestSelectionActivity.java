@@ -8,9 +8,9 @@ import android.widget.Button;
 
 import com.ms.tests.bubble.BubbleTestActivity;
 import com.ms.tests.level.LevelTestActivity;
+import com.ms.tests.rotation.RotationTestCalibrationActivity;
 import com.ms.tests.spiral.SpiralTestActivity;
 import com.ms.tests.tap.TapConfigActivity;
-import com.ms.tests.rotation.RotationTestActivity;
 
 public class TestSelectionActivity extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class TestSelectionActivity extends AppCompatActivity {
     }
 
     public void onRotationClick(View v){
-        Intent i = new Intent(TestSelectionActivity.this, RotationTestActivity.class);
+        Intent i = new Intent(TestSelectionActivity.this, RotationTestCalibrationActivity.class);
         startActivity(i);
     }
 

@@ -91,6 +91,10 @@ public class LevelTestActivity extends AppCompatActivity implements SensorEventL
         mSensorManager.unregisterListener(this);
     }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
     public void onSensorChanged(SensorEvent event) {
         if (event.values == null) {
             return;
@@ -139,14 +143,12 @@ public class LevelTestActivity extends AppCompatActivity implements SensorEventL
         mDegreeView.setText(String.format("%d, %d", pitchDeg, rollDeg));
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
     private int scaleAngle(double degrees){
         degrees = Math.toDegrees(degrees);
         return (int) (Math.abs(degrees) < MIN_THRESHOLD ? 0 : degrees);
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
