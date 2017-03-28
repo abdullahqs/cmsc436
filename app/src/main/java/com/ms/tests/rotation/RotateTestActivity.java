@@ -27,7 +27,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
     boolean listened;
     int counter;
     int process;
-    int temptime;
+    double temptime;
 
     private Sensor mAccel;
     private Sensor mMagnet;
@@ -40,7 +40,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
     int[] startend;
     TextView display;
-    int[] repTime;
+    double[] repTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
         display.setText(out);
 
 
-        repTime = new int[10];
+        repTime = new double[10];
 
         listened = false;
         counter = 0;
@@ -194,7 +194,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
                     listened = true;
                     process += 1;
                     double temp = System.currentTimeMillis() / 1000;
-                    temptime = (int) Math.floor(temp);
+                    temptime = temp;
                 } else if (listened && confirmMiddle(pitchDeg, rollDeg) && process == 1) {
                     process += 1;
                 } else if (listened && confirmEnd(pitchDeg, rollDeg) && process == 2) {
@@ -203,8 +203,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
                 } else if (!listened && confirmMiddle(pitchDeg, rollDeg) && process == 3) {
                     process += 1;
                 } else if (!listened && confirmStart(pitchDeg, rollDeg) && process == 4) {
-                    double end = System.currentTimeMillis() / 1000;
-                    int endsec = (int) Math.floor(end);
+                    double endsec = System.currentTimeMillis() / 1000;
                     temptime = endsec - temptime;
                     repTime[counter] = temptime;
                     counter += 1;
