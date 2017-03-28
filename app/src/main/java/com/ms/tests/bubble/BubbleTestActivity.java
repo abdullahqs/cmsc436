@@ -1,31 +1,18 @@
 package com.ms.tests.bubble;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.ms.tests.R;
-import com.ms.tests.tap.TapTestResultActivity;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Random;
 
 public class BubbleTestActivity extends AppCompatActivity {
-    private static final int TEST_DURATION = 10000;
+    /*private static final int TEST_DURATION = 10000;
     private static final int COUNTDOWN_INTERVAL = 1000;
 
     private CountDownTimer _bubbleTest = new CountDownTimer(TEST_DURATION, COUNTDOWN_INTERVAL) {
@@ -37,9 +24,12 @@ public class BubbleTestActivity extends AppCompatActivity {
         public void onFinish() {
             finishTest();
         }
-    };
+    };*/
 
-    private int _popCount = 0;
+    private double[] popTimes;
+    private int totalBubbles;
+    private int poppedBubbles;
+    private double startTime;
     private int maxWidth, maxHeight;
     Random r;
 
@@ -53,20 +43,28 @@ public class BubbleTestActivity extends AppCompatActivity {
         maxWidth = displayMetrics.widthPixels;
         maxHeight = displayMetrics.heightPixels;
 
+        totalBubbles = 20;
+        popTimes = new double[totalBubbles];
+        poppedBubbles = 0;
         r = new Random();
+        startTime = System.currentTimeMillis();
 
         final ImageButton bubble  = (ImageButton) findViewById(R.id.bubble);
         bubble.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                _popCount++;
+                double currentTime = System.currentTimeMillis();
+                popTimes[poppedBubbles] = currentTime - startTime;
+                startTime = currentTime;
+                poppedBubbles++;
 
-                moveBubble(bubble);
+                if(poppedBubbles >= popTimes.length)
+                    finishTest();
+                else
+                    moveBubble(bubble);
             }
         });
 
         moveBubble(bubble);
-
-        _bubbleTest.start();
     }
 
     void finishTest() {
@@ -78,7 +76,14 @@ public class BubbleTestActivity extends AppCompatActivity {
 
         i.putExtra(BubbleTestResults.RESULTS_KEY, _testResults);*/
 
-        i.putExtra(BubbleTestResults.RESULTS_KEY, _popCount);
+        double averageTime = 0;
+        for(double t : popTimes) {
+            averageTime += t;
+        }
+
+        averageTime = Math.round(((averageTime / popTimes.length ) / 1000.0) * 100.0) / 100.0;
+
+        i.putExtra(BubbleTestResults.RESULTS_KEY, averageTime);
 
         startActivity(i);
     }

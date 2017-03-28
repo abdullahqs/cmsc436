@@ -27,9 +27,9 @@ public class BubbleTestResultsActivity extends AppCompatActivity {
         bubblePops.setText("You popped " + results.numPops + " balloons!");
         final String shareString = "Popped " + results.numPops + " balloons!";*/
 
-        int numPops = i.getIntExtra(BubbleTestResults.RESULTS_KEY, 0);
-        bubblePops.setText("You popped " + numPops + " balloons!");
-        final String shareString = "Popped " + numPops + " balloons!";
+        double averagePopTime = i.getDoubleExtra(BubbleTestResults.RESULTS_KEY, 0);
+        bubblePops.setText("Your average pop time is " + averagePopTime + " seconds!");
+        final String shareString = "Average pop time:  " + averagePopTime + " seconds!";
 
         final Button shareButton = (Button) findViewById(R.id.bubble_results_share_button);
         shareButton.setOnClickListener(new View.OnClickListener() {
