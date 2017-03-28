@@ -8,7 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.PointF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -34,8 +37,10 @@ public class DrawingView extends ImageView {
     private Paint circlePaint;
     private Path circlePath;
 
+    private ArrayList<PointF> userPoints;
     private Bitmap spiral;
-    private int spiralX, spiralY;
+    private int spiralY;
+    private Point[] spiralPoints;
 
     class Pair {
         double x;
@@ -74,7 +79,43 @@ public class DrawingView extends ImageView {
         circlePath = new Path();
         circlePaint.setColor(Color.BLACK);
         circlePaint.setStrokeWidth(2f);
+
+        userPoints = new ArrayList<PointF>();
+        spiralPoints = new Point[32];
+        spiralPoints[ 0] = new Point(158, 22);
+        spiralPoints[ 1] = new Point(182, 41);
+        spiralPoints[ 2] = new Point(196, 63);
+        spiralPoints[ 3] = new Point(206, 87);
+        spiralPoints[ 4] = new Point(210, 114);
+        spiralPoints[ 5] = new Point(207, 142);
+        spiralPoints[ 6] = new Point(197, 169);
+        spiralPoints[ 7] = new Point(182, 188);
+        spiralPoints[ 8] = new Point(162, 203);
+        spiralPoints[ 9] = new Point(140, 213);
+        spiralPoints[10] = new Point(113, 217);
+        spiralPoints[11] = new Point(87, 213);
+        spiralPoints[12] = new Point(64, 203);
+        spiralPoints[13] = new Point(46, 187);
+        spiralPoints[14] = new Point(35, 167);
+        spiralPoints[15] = new Point(28, 146);
+        spiralPoints[16] = new Point(28, 122);
+        spiralPoints[17] = new Point(35, 100);
+        spiralPoints[18] = new Point(48, 82);
+        spiralPoints[19] = new Point(66, 69);
+        spiralPoints[20] = new Point(94, 62);
+        spiralPoints[21] = new Point(118, 66);
+        spiralPoints[22] = new Point(136, 77);
+        spiralPoints[23] = new Point(147, 94);
+        spiralPoints[24] = new Point(153, 114);
+        spiralPoints[25] = new Point(148, 138);
+        spiralPoints[26] = new Point(133, 153);
+        spiralPoints[27] = new Point(113, 160);
+        spiralPoints[28] = new Point(95, 153);
+        spiralPoints[29] = new Point(85, 136);
+        spiralPoints[30] = new Point(92, 118);
+        spiralPoints[31] = new Point(105, 125);
     }
+
 
     private void createScaledSpiral(Canvas c){
         Bitmap unscaledSpiral = BitmapFactory.decodeResource(getResources(), R.drawable.spiral);
@@ -84,7 +125,37 @@ public class DrawingView extends ImageView {
 
         spiral = Bitmap.createScaledBitmap(unscaledSpiral, targetWidth, targetHeight, false);
         spiralY = c.getHeight()/2 - spiral.getHeight()/2;
+
+        int trueWidth = 240;
+        float scaledBy = (float)targetWidth / trueWidth;
+
+        for (int i = 0; i < spiralPoints.length; i++) {
+            spiralPoints[i].x *= scaledBy;
+            spiralPoints[i].y *= scaledBy;
+            spiralPoints[i].y += spiralY;
+        }
     }
+
+    public ArrayList<Pair> getUserPoints(){
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        for(PointF point :this.userPoints){
+            Pair pair = new Pair(point.x,point.y);
+            pairs.add(pair);
+        }
+        return pairs;
+    }
+
+    public ArrayList<Pair> getFixedPoints(){
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        for(Point point :this.spiralPoints){
+            Pair pair = new Pair(point.x,point.y);
+            pairs.add(pair);
+        }
+        return pairs;
+    }
+
+
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -106,6 +177,11 @@ public class DrawingView extends ImageView {
         canvas.drawBitmap( mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath( mPath,  mPaint);
         canvas.drawPath( circlePath,  circlePaint);
+
+        // Draws debug points
+        for (int i = 0; i < spiralPoints.length; i++) {
+            canvas.drawPoint(spiralPoints[i].x, spiralPoints[i].y, mPaint);
+        }
     }
 
     private float mX, mY;
@@ -116,6 +192,8 @@ public class DrawingView extends ImageView {
         mPath.moveTo(x, y);
         mX = x;
         mY = y;
+
+        userPoints.add(new PointF(x, y));
     }
 
     private void touch_move(float x, float y) {
@@ -159,6 +237,7 @@ public class DrawingView extends ImageView {
         return true;
     }
 
+    // DON'T USE
     public boolean SaveImage(String fileName) {
 
         ContextWrapper cw = new ContextWrapper(context);
@@ -197,8 +276,12 @@ public class DrawingView extends ImageView {
             currentDeviation = 999999;
         }
 
-        // Standarizing based on number of points inputted. 
-        return agg/inputPoints.size();
+        double score = agg/inputPoints.size();
+        score = (500 - score)/5;
+        return score;
+
+        // Standarizing based on number of points inputted.
+        //return agg/inputPoints.size();
 
     }
 }

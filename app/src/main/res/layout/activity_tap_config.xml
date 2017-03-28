@@ -11,7 +11,7 @@
     tools:context="com.ms.tests.tap.TapConfigActivity">
 
     <RadioGroup
-        android:id="@+id/hand"
+        android:id="@+id/tap_config_hand"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_alignParentStart="true"
@@ -25,13 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="27sp"
-            android:id="@+id/lefthand" />
+            android:id="@+id/tap_config_lefthand" />
 
         <RadioButton
             android:text="Right Hand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/righthand"
+            android:id="@+id/tap_config_righthand"
             android:layout_marginRight="11dp"
             android:layout_marginEnd="11dp"
             android:textSize="27sp"
@@ -43,7 +43,7 @@
         android:text="Start Tests"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
-        android:id="@+id/teststart"
+        android:id="@+id/tap_config_teststart"
         android:textSize="50sp"
         android:fontFamily="Roboto"
         android:background="#E0FF4F"
@@ -63,8 +63,8 @@
         android:inputType="number"
         android:ems="10"
         android:layout_marginTop="38dp"
-        android:id="@+id/numberoftests"
-        android:layout_below="@+id/hand"
+        android:id="@+id/tap_config_numberoftests"
+        android:layout_below="@+id/tap_config_hand"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

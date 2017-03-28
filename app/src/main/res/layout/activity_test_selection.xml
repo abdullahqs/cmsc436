@@ -15,7 +15,7 @@
     <Button
         android:text="Tap Test"
         android:layout_width="wrap_content"
-        android:layout_height="250px"
+        android:layout_height="75dp"
         android:id="@+id/tapButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -31,7 +31,7 @@
     <Button
         android:text="Spiral Test"
         android:layout_width="wrap_content"
-        android:layout_height="250px"
+        android:layout_height="75dp"
         android:layout_marginTop="16dp"
         android:id="@+id/spiralButton"
         android:layout_below="@+id/tapButton"
@@ -47,10 +47,10 @@
         />
 
     <Button
-        android:text="Spider Test"
+        android:text="Level Test"
         android:layout_width="wrap_content"
-        android:layout_height="250px"
-        android:id="@+id/spiderButton"
+        android:layout_height="75dp"
+        android:id="@+id/levelButton"
         android:layout_below="@+id/spiralButton"
         android:layout_marginTop="16dp"
         android:layout_alignParentLeft="true"
@@ -58,8 +58,45 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textSize="50sp"
+        android:onClick="onLevelClick"
         android:fontFamily="Roboto"
         android:background="#BFD7EA"
+        android:textColor="#000000"
+        />
+
+    <Button
+        android:text="Bubble Test"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:id="@+id/bubbleButton"
+        android:layout_below="@+id/levelButton"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="50sp"
+        android:onClick="onBubbleClick"
+        android:fontFamily="Roboto"
+        android:background="#008080"
+        android:textColor="#000000"
+        />
+
+    <Button
+        android:text="Rotate Test"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:id="@+id/rotationButton"
+        android:layout_below="@+id/bubbleButton"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="50sp"
+        android:onClick="onRotationClick"
+        android:fontFamily="Roboto"
+        android:background="#9E7682"
         android:textColor="#000000"
         />
 

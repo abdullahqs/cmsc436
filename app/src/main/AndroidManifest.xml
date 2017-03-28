@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ms.tests">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +23,23 @@
         <activity android:name=".tap.TapConfigActivity" />
         <activity android:name=".spiral.SpiralTestActivity" />
         <activity android:name=".spiral.SpiralTestResultActivity" />
-
+        <activity
+            android:name=".bubble.BubbleTestActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".bubble.BubbleTestResultsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".level.LevelTestActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".level.LevelTestResultsActivity" />
+        <activity
+            android:name=".rotation.RotateTestCalibrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".rotation.RotateTestActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".rotation.RotateResultActivity"></activity>
     </application>
 
 </manifest>

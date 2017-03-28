@@ -50,7 +50,7 @@ public class TapTestActivity extends AppCompatActivity {
         _testResults = i.getParcelableExtra(TapTestResults.RESULTS_KEY);
         _testRound = i.getIntExtra(ROUND_KEY, 1);
 
-        _tapView = (RelativeLayout) findViewById(R.id.tap_view);
+        _tapView = (RelativeLayout) findViewById(R.id.tap_test_view);
 
 
         final Button button  = (Button) findViewById(R.id.tap_test_area);
