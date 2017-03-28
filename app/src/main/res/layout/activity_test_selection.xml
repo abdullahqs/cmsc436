@@ -96,7 +96,7 @@
         android:textSize="50sp"
         android:onClick="onRotationClick"
         android:fontFamily="Roboto"
-        android:background="#A4C639"
+        android:background="#9E7682"
         android:textColor="#000000"
         />
 

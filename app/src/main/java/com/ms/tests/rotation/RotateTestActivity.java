@@ -137,7 +137,7 @@ public class RotateTestActivity extends AppCompatActivity implements SensorEvent
 
     private boolean confirmMiddle(int pitchDeg, int rollDeg){
         if(isArm) {
-            return pitchDeg >= 75;
+            return pitchDeg >= 70;
         } else {
             return pitchDeg >= -40;
         }
