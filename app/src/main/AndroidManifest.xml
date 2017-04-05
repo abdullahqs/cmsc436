@@ -25,10 +25,10 @@
         <activity android:name=".spiral.SpiralTestResultActivity" />
         <activity
             android:name=".bubble.BubbleTestActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".bubble.BubbleTestResultsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".level.LevelTestActivity"
             android:screenOrientation="portrait" />
@@ -39,7 +39,8 @@
         <activity
             android:name=".rotation.RotateTestActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".rotation.RotateResultActivity"></activity>
+        <activity android:name=".rotation.RotateResultActivity" />
+        <activity android:name=".sway.SwayTestConfig"></activity>
     </application>
 
 </manifest>
