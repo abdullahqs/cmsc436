@@ -13,7 +13,9 @@
     <Button
         android:text="First, place device on head securely.
 
-Then, click on screen when ready."
+ Device must be on the right side of the head with the screen facing outwards.
+
+ Then, click on screen when ready. When you hear the beep, close your eyes for 10 seconds."
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/button"
@@ -22,6 +24,7 @@ Then, click on screen when ready."
         android:layout_alignParentEnd="true"
         android:textSize="30sp"
         android:background="#ffffff"
+        android:onClick="onSwayClick"
 
         />
 </RelativeLayout>

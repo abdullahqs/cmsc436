@@ -1,4 +1,4 @@
-package com.ms.tests.level;
+package com.ms.tests.sway;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,10 +14,11 @@ import android.view.View;
 import com.ms.tests.R;
 
 /**
- * Created by Carlos on 2/21/2017.
+ * Created by radhika on 4/6/17.
  */
 
-public class LevelTiltView extends View {
+public class SwayTiltView extends View {
+
     private static final double BALL_SENSITIVITY = 0.03;
     private static final double BALL_RADIUS = 50;
 
@@ -38,19 +39,19 @@ public class LevelTiltView extends View {
 
     private boolean mStartedTest;
 
-    public LevelTiltView(Context context) {
+    public SwayTiltView(Context context) {
         super(context);
 
         init();
     }
 
-    public LevelTiltView(Context context, AttributeSet attrs) {
+    public SwayTiltView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         init();
     }
 
-    public LevelTiltView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SwayTiltView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         init();
@@ -63,9 +64,7 @@ public class LevelTiltView extends View {
         mVelocity = new Point(0, 0);
 
         mBall = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
-        mPaddle = BitmapFactory.decodeResource(getResources(), R.drawable.paddle);
-
-
+        mPaddle = BitmapFactory.decodeResource(getResources(), R.drawable.bullseye);
     }
 
     public void startTest(){
@@ -144,4 +143,7 @@ public class LevelTiltView extends View {
         mPaddlePoint.x = 0;
         mPaddlePoint.y = 0;
     }
+
+
+
 }
