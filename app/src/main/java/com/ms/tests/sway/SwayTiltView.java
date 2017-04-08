@@ -19,7 +19,7 @@ import com.ms.tests.R;
 
 public class SwayTiltView extends View {
 
-    private static final double BALL_SENSITIVITY = 0.03;
+    private static final double BALL_SENSITIVITY = 0.002;
     private static final double BALL_RADIUS = 50;
 
     private boolean mActive;

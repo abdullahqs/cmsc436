@@ -35,8 +35,12 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
     private Sensor mMagnet;
 
     int[] pitchrolls;
+    public int yawDeg;
     public int pitchDeg;
     public int rollDeg;
+
+    int initYaw, initRoll;
+    boolean inited;
 
     private MediaPlayer beepSound;
 
@@ -126,15 +130,23 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
         float orientation[] = new float[9];
         SensorManager.getOrientation(rot, orientation);
 
+        float yaw = orientation[0];
         float pitch = orientation[1];
         float roll = orientation[2];
+        yawDeg = scaleAngle(yaw);
         rollDeg = scaleAngle(roll);
         pitchDeg = -1* scaleAngle(pitch);
 
+        if (!inited) {
+            inited = true;
+            initYaw = yawDeg;
+            initRoll =rollDeg;
+        }
+
+        mSwayView.onTiltChanged(pitchDeg - initRoll,yawDeg - initYaw);
+
         Log.v(TAG, String.format("%d, %d", pitchDeg,rollDeg));
-        mDegreeView.setText(String.format("%d, %d", pitchDeg, rollDeg));
-
-
+        mDegreeView.setText(String.format("%d, %d, %d", yawDeg, pitchDeg, rollDeg));
 
     }
     private int scaleAngle(double degrees){
