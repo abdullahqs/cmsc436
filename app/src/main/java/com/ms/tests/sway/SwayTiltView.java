@@ -132,8 +132,8 @@ public class SwayTiltView extends View {
 
             bestScore += 1;
 
-            float dist = (float)Math.sqrt(Math.pow(mBubblePoint.x, 2) + Math.pow(mBubblePoint.y, 2));
-            score += 1 - Math.min(dist / mCanvas.getWidth(), 1);
+            float dist = (float)Math.sqrt(Math.pow(mBubblePoint.x - mCanvas.getWidth()/2, 2) + Math.pow(mBubblePoint.y - mCanvas.getHeight()/2, 2));
+            score += 1 - Math.min(dist / (mCanvas.getWidth()/2), 1);
 
 
             if (Math.abs(oldX - mBubblePoint.x) < 5 || Math.abs(oldY - mBubblePoint.y) < 5) {
