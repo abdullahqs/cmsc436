@@ -35,6 +35,7 @@ import java.util.TimerTask;
 public class SwayTestCalibration extends AppCompatActivity implements SensorEventListener{
 
     public static final String RESULT_IMAGE_URI = "result_image_uri";
+    public static final String RESULT_SCORE = "result_score";
     private static final int REQUEST_EXTERNAL_STORAGE = 0x2;
     private static final double MIN_THRESHOLD = 0.5;
     private final static String TAG = "SwayTestActivity";
@@ -249,6 +250,7 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
 
         if(fileUri != null)
             i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
+        i.putExtra(RESULT_SCORE, mSwayView.getScore());
 
         startActivity(i);
     }

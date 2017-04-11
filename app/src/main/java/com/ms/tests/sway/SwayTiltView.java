@@ -46,6 +46,9 @@ public class SwayTiltView extends View {
 
     private boolean mStartedTest;
 
+    float score;
+    int bestScore;
+
     public SwayTiltView(Context context) {
         super(context);
 
@@ -127,6 +130,11 @@ public class SwayTiltView extends View {
             mBubblePoint.x += mVelocity.x * delta * BALL_SENSITIVITY;
             mBubblePoint.y += mVelocity.y * delta * BALL_SENSITIVITY;
 
+            bestScore += 1;
+
+            float dist = (float)Math.sqrt(Math.pow(mBubblePoint.x, 2) + Math.pow(mBubblePoint.y, 2));
+            score += 1 - Math.min(dist / mCanvas.getWidth(), 1);
+
 
             if (Math.abs(oldX - mBubblePoint.x) < 5 || Math.abs(oldY - mBubblePoint.y) < 5) {
                 mPath.quadTo(oldX, oldY,mBubblePoint.x, mBubblePoint.y);
@@ -175,5 +183,7 @@ public class SwayTiltView extends View {
     }
 
 
-
+    public int getScore() {
+        return (int)(score * 100 / bestScore);
+    }
 }

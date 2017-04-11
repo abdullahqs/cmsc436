@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ms.tests.R;
 import com.ms.tests.level.LevelTestActivity;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 public class SwayTestResults extends AppCompatActivity {
     private Button mButton;
     private ImageView mResultView;
+    private TextView mScore;
     private Uri mImageUri;
 
     @Override
@@ -25,18 +27,25 @@ public class SwayTestResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sway_test_results);
 
+        mScore = (TextView) findViewById(R.id.sway_result_score);
         mButton = (Button) findViewById(R.id.sway_results_share_button);
         mResultView = (ImageView) findViewById(R.id.sway_result_image);
 
         Intent i = getIntent();
 
-        String resultImage = i.getStringExtra(LevelTestActivity.RESULT_IMAGE_URI);
+        String resultImage = i.getStringExtra(SwayTestCalibration.RESULT_IMAGE_URI);
         if(resultImage != null) {
             mImageUri = Uri.parse(resultImage);
             mResultView.setImageURI(mImageUri);
         }
 
-        int calculation = 0;
+        final int calculation = i.getIntExtra(SwayTestCalibration.RESULT_SCORE, 0);
+        mScore.post(new Runnable() {
+            @Override
+            public void run() {
+                mScore.setText(calculation + "");
+            }
+        });
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
