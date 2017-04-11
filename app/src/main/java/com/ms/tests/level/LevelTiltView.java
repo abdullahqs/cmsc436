@@ -37,6 +37,8 @@ public class LevelTiltView extends View {
     private long mCurrentTime;
 
     private boolean mStartedTest;
+    private float score;
+    private float bestScore;
 
     public LevelTiltView(Context context) {
         super(context);
@@ -64,8 +66,6 @@ public class LevelTiltView extends View {
 
         mBall = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
         mPaddle = BitmapFactory.decodeResource(getResources(), R.drawable.paddle);
-
-
     }
 
     public void startTest(){
@@ -106,7 +106,13 @@ public class LevelTiltView extends View {
             mBubblePoint.x += mVelocity.x * delta * BALL_SENSITIVITY;
             mBubblePoint.y += mVelocity.y * delta * BALL_SENSITIVITY;
             Log.v("TEST", "Inside updating position");
+
+            bestScore++;
+            float distToCenter = (float)Math.sqrt(Math.pow(mBubblePoint.x-mCanvas.getWidth()/2, 2) + Math.pow(mBubblePoint.y-mCanvas.getWidth()/2,2));
+            score += 1 - Math.min(distToCenter / (mCanvas.getWidth()/2), 1);
         }
+
+
 
         Log.v("TEST", "Inside update");
 
@@ -143,5 +149,9 @@ public class LevelTiltView extends View {
 
         mPaddlePoint.x = 0;
         mPaddlePoint.y = 0;
+    }
+
+    public int getScore() {
+        return (int)(score * 100 / bestScore);
     }
 }

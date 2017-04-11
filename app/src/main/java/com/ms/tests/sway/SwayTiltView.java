@@ -86,7 +86,6 @@ public class SwayTiltView extends View {
         mVelocity = new Point(0, 0);
 
         mBall = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
-        mPaddle = BitmapFactory.decodeResource(getResources(), R.drawable.bullseye);
     }
 
     public void startTest(){
@@ -100,12 +99,24 @@ public class SwayTiltView extends View {
         mActive = false;
     }
 
+    private void createScaledPaddle(Canvas c){
+        Bitmap unscaledPaddle = BitmapFactory.decodeResource(getResources(), R.drawable.bullseye);
+        float ratio = unscaledPaddle.getHeight() / unscaledPaddle.getWidth();
+        int targetWidth = c.getWidth();
+        int targetHeight = (int)(ratio * targetWidth);
+
+        mPaddle = Bitmap.createScaledBitmap(unscaledPaddle, targetWidth, targetHeight, false);
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         if(!mStartedTest && mActive)
             return;
+
+        if(mPaddle == null)
+            createScaledPaddle(canvas);
 
         canvas.drawBitmap(mPaddle, null, getPaddleRect(canvas), mBitmapPaint);
         canvas.drawBitmap(mBall, null, getBallRect(), mBitmapPaint);

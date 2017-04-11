@@ -2,15 +2,14 @@ package com.ms.tests.level;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ms.tests.R;
-import com.ms.tests.spiral.SpiralTestActivity;
-import com.ms.tests.spiral.SpiralTestResults;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,6 +19,7 @@ public class LevelTestResultsActivity extends AppCompatActivity {
     private ImageView mResultView;
     private Uri mImageUri;
 
+    private TextView mResultScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class LevelTestResultsActivity extends AppCompatActivity {
 
         mButton = (Button) findViewById(R.id.level_results_share_button);
         mResultView = (ImageView) findViewById(R.id.level_results_result_preview);
+        mResultScore = (TextView) findViewById(R.id.level_results_score);
 
         Intent i = getIntent();
 
@@ -35,6 +36,11 @@ public class LevelTestResultsActivity extends AppCompatActivity {
         if(resultImage != null) {
             mImageUri = Uri.parse(resultImage);
             mResultView.setImageURI(mImageUri);
+        }
+
+        String score = i.getStringExtra(LevelTestActivity.RESULT_SCORE);
+        if(score != null){
+            mResultScore.setText(score);
         }
 
         int calculation = 0;
