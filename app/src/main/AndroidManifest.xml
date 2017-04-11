@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -29,10 +28,10 @@
         <activity android:name=".spiral.SpiralTestResultActivity" />
         <activity
             android:name=".bubble.BubbleTestActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".bubble.BubbleTestResultsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".level.LevelTestActivity"
             android:screenOrientation="portrait" />
@@ -43,7 +42,11 @@
         <activity
             android:name=".rotation.RotateTestActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".rotation.RotateResultActivity"></activity>
+        <activity android:name=".rotation.RotateResultActivity" />
+        <activity android:name=".sway.SwayTestCalibration" />
+        <activity android:name=".sway.SwayTestConfig" />
+        <activity android:name=".sway.SwayTestResults" />
+        <activity android:name=".sway.SwayTiltView"></activity>
     </application>
 
 </manifest>

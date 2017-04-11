@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.ms.tests.R;
+import com.ms.tests.SheetsStrings;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,17 +29,19 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
     private static final int LIB_PERMISSION_REQUEST_CODE = 1003;
     private static final int LIB_PLAY_SERVICES_REQUEST_CODE = 1004;
 
-    private CMSC436Sheet sheet;
+    private CMSC436Sheet sheet, sheet2;
 
     @Override
     public void onRequestPermissionsResult (int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         sheet.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        sheet2.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         sheet.onActivityResult(requestCode, resultCode, data);
+        sheet2.onActivityResult(requestCode, resultCode, data);
     }
 
     public int getRequestCode(CMSC436Sheet.Action action) {
@@ -106,14 +109,24 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
             }
         });
 
+        SheetsStrings ss = new SheetsStrings();
+
         if (true){
-            sheet = new CMSC436Sheet(this, getString(R.string.app_name), "1ooKJktuWc0N9SFUkcI8GlgkoRQLGP6mqOwt2TKmOIDo");
-            sheet.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", System.currentTimeMillis());
-            sheet.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", (float)calculation);
+            sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
+            sheet.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
+            sheet.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", (float)calculation);
+
+            sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
+            sheet2.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
+            sheet2.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", (float)calculation);
         } else {
-            sheet = new CMSC436Sheet(this, getString(R.string.app_name), "1ooKJktuWc0N9SFUkcI8GlgkoRQLGP6mqOwt2TKmOIDo");
-            sheet.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", System.currentTimeMillis());
-            sheet.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", (float)calculation);
+            sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
+            sheet.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
+            sheet.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", (float)calculation);
+
+            sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
+            sheet2.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
+            sheet2.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", (float)calculation);
         }
     }
 }
