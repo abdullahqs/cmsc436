@@ -99,19 +99,19 @@ public class RotateResultActivity extends AppCompatActivity implements CMSC436Sh
 
         if (true){
             sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
-            sheet.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", System.currentTimeMillis());
+            //sheet.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", System.currentTimeMillis());
             sheet.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", (float)average);
 
             sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
-            sheet2.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", System.currentTimeMillis());
+            //sheet2.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", System.currentTimeMillis());
             sheet2.writeData(CMSC436Sheet.TestType.RH_CURL, "t15p01", (float)average);
         } else {
             sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
-            sheet.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", System.currentTimeMillis());
+            //sheet.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", System.currentTimeMillis());
             sheet.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", (float)average);
 
             sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
-            sheet2.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", System.currentTimeMillis());
+            //sheet2.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", System.currentTimeMillis());
             sheet2.writeData(CMSC436Sheet.TestType.LH_CURL, "t15p01", (float)average);
         }
 

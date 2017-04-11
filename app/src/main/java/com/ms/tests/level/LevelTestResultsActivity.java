@@ -121,19 +121,19 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
 
         if (true){
             sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
-            sheet.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
+            //sheet.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
             sheet.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", (float)calculation);
 
             sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
-            sheet2.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
+            //sheet2.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", System.currentTimeMillis());
             sheet2.writeData(CMSC436Sheet.TestType.RH_LEVEL, "t15p01", (float)calculation);
         } else {
             sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
-            sheet.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
+            //sheet.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
             sheet.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", (float)calculation);
 
             sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
-            sheet2.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
+            //sheet2.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", System.currentTimeMillis());
             sheet2.writeData(CMSC436Sheet.TestType.LH_LEVEL, "t15p01", (float)calculation);
         }
     }

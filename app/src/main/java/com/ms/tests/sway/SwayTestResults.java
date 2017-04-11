@@ -118,11 +118,11 @@ public class SwayTestResults extends AppCompatActivity implements CMSC436Sheet.H
         SheetsStrings ss = new SheetsStrings();
 
         sheet = new CMSC436Sheet(this, getString(R.string.app_name), ss.getUrl());
-        sheet.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", System.currentTimeMillis());
+        //sheet.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", System.currentTimeMillis());
         sheet.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", calculation);
 
         sheet2 = new CMSC436Sheet(this, getString(R.string.app_name), ss.getTeamUrl());
-        sheet2.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", System.currentTimeMillis());
+        //sheet2.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", System.currentTimeMillis());
         sheet2.writeData(CMSC436Sheet.TestType.RH_SPIRAL, "t15p01", calculation);
 
     }
