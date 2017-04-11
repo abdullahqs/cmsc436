@@ -1,19 +1,34 @@
 package com.ms.tests.sway;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.ms.tests.R;
+import com.ms.tests.level.LevelTestActivity;
+import com.ms.tests.level.LevelTestResultsActivity;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,7 +51,15 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
 
     int[] pitchrolls;
     public int pitchDeg;
+    public int azimutDeg;
     public int rollDeg;
+
+    boolean inited;
+    int initPitch;
+    int initAzimut;
+    int initRoll;
+    int lastAzimut;
+    int positive;
 
     private MediaPlayer beepSound;
 
@@ -67,8 +90,7 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
             public void run() {
                 mSwayView.endTest();
                 beepSound.start();
-                Intent i = new Intent(SwayTestCalibration.this, SwayTestResults.class);
-                startActivity(i);
+                saveBitmap();
             }
         }, 10000);
     }
@@ -117,22 +139,38 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
             return;
         }
 
-        float rot[] = new float[9];
-        if (!SensorManager.getRotationMatrix(rot, null, mGravity, mGeomagnetic)) {
+        float R[] = new float[9];
+        float I[] = new float[9];
+        if (!SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic)) {
             Log.w(TAG, "getRotationMatrix() failed");
             return;
         }
 
-        float orientation[] = new float[9];
-        SensorManager.getOrientation(rot, orientation);
+        float orientation[] = new float[3];
+        SensorManager.getOrientation(R, orientation);
 
         float pitch = orientation[1];
+        float azimut= orientation[0];
         float roll = orientation[2];
+        azimutDeg = scaleAngle(azimut);
+        pitchDeg = scaleAngle(pitch);
         rollDeg = scaleAngle(roll);
-        pitchDeg = -1* scaleAngle(pitch);
 
-        Log.v(TAG, String.format("%d, %d", pitchDeg,rollDeg));
-        mDegreeView.setText(String.format("%d, %d", pitchDeg, rollDeg));
+        if (azimutDeg < 0) azimutDeg += 360;
+        azimutDeg += 180;
+
+        if (!inited) {
+            initRoll = rollDeg;
+            initAzimut = azimutDeg;
+            initPitch = pitchDeg;
+            inited = true;
+        }
+
+
+        mSwayView.onTiltChanged(azimutDeg - initAzimut, rollDeg - initRoll);
+
+        Log.v(TAG, String.format("%d, %d", pitchDeg,azimutDeg));
+        mDegreeView.setText(String.format("%d, %d, %d", azimutDeg - initAzimut, scaleAngle(orientation[1]) - initPitch, scaleAngle(orientation[2]) - initRoll));
 
 
 
@@ -145,5 +183,73 @@ public class SwayTestCalibration extends AppCompatActivity implements SensorEven
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    saveBitmap();
+                } else {
+                    Intent i = new Intent(SwayTestCalibration.this, SwayTestResults.class);
+                    startActivity(i);
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    public void saveBitmap() {
+
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
+            return;
+        }
+
+        File file=new File(Environment.getExternalStorageDirectory()+"/swayTest");
+        if(!file.isDirectory()){
+            file.mkdir();
+        }
+
+        file = new File(Environment.getExternalStorageDirectory()+"/swayTest",System.currentTimeMillis()+".jpg");
+        Uri fileUri = null;
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            mSwayView.getDrawingCache().compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+
+            ContentValues values = new ContentValues();
+            values.put(MediaStore.Images.Media.TITLE, "Sway Test");
+            values.put(MediaStore.Images.Media.DESCRIPTION, "Sway Test for MS");
+            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis ());
+            values.put(MediaStore.Images.ImageColumns.BUCKET_ID, file.toString().toLowerCase(Locale.US).hashCode());
+            values.put(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME, file.getName().toLowerCase(Locale.US));
+            values.put("_data", file.getAbsolutePath());
+
+            ContentResolver cr = getContentResolver();
+            fileUri = cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Intent i = new Intent(SwayTestCalibration.this, SwayTestResults.class);
+
+        if(fileUri != null)
+            i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
+
+        startActivity(i);
     }
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -19,12 +21,17 @@ import com.ms.tests.R;
 
 public class SwayTiltView extends View {
 
-    private static final double BALL_SENSITIVITY = 0.03;
+    private static final double BALL_SENSITIVITY = 0.005;
     private static final double BALL_RADIUS = 50;
 
     private boolean mActive;
 
     private Canvas mCanvas;
+    private Path mPath;
+    private Paint mPaint;
+    private Paint circlePaint;
+    private Path circlePath;
+
     private Bitmap mBitmap;
     private Bitmap mBall;
     private Bitmap mPaddle;
@@ -59,6 +66,18 @@ public class SwayTiltView extends View {
 
     private void init(){
         setDrawingCacheEnabled(true);
+
+        mPath = new Path();
+        mPaint = new Paint();
+        mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(10);
+
+        circlePaint = new Paint();
+        circlePath = new Path();
+        circlePaint.setColor(Color.BLACK);
+        circlePaint.setStrokeWidth(2f);
+
         mPaddlePoint = new Point();
         mBubblePoint = new Point();
         mVelocity = new Point(0, 0);
@@ -87,6 +106,7 @@ public class SwayTiltView extends View {
 
         canvas.drawBitmap(mPaddle, null, getPaddleRect(canvas), mBitmapPaint);
         canvas.drawBitmap(mBall, null, getBallRect(), mBitmapPaint);
+        canvas.drawPath( mPath,  mPaint);
     }
 
     private Rect getPaddleRect(Canvas c){
@@ -102,8 +122,17 @@ public class SwayTiltView extends View {
 
     private void update(long delta){
         if(mStartedTest) {
+            float oldX = mBubblePoint.x;
+            float oldY = mBubblePoint.y;
             mBubblePoint.x += mVelocity.x * delta * BALL_SENSITIVITY;
             mBubblePoint.y += mVelocity.y * delta * BALL_SENSITIVITY;
+
+
+            if (Math.abs(oldX - mBubblePoint.x) < 5 || Math.abs(oldY - mBubblePoint.y) < 5) {
+                mPath.quadTo(oldX, oldY,mBubblePoint.x, mBubblePoint.y);
+                circlePath.reset();
+                circlePath.addCircle(mBubblePoint.x, mBubblePoint.y, 30, Path.Direction.CW);
+            }
             Log.v("TEST", "Inside updating position");
         }
 
@@ -124,6 +153,7 @@ public class SwayTiltView extends View {
 
         if(mLastUpdateTime == 0) {
             mLastUpdateTime = mCurrentTime;
+            mPath.reset();
             return;
         }else
             update(mCurrentTime - mLastUpdateTime);

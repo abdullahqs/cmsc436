@@ -8,34 +8,28 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.ms.tests.sway.SwayTestResults">
+
+
+    <Button
+        android:padding="25dp"
+        android:textSize="20sp"
+        android:text="Share Results?"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/sway_results_share_button" />
 
     <ImageView
         android:id="@+id/sway_result_image"
         android:scaleType="fitCenter"
-        android:layout_below="@id/score"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:layout_above="@id/sway_results_share_button"
          />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/score"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        android:textSize="100sp"
-        android:layout_above="@+id/spiral_results_result_preview"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:text="75" />
-
-    <TextView
-        android:text="Score out of 100:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-
 </RelativeLayout>

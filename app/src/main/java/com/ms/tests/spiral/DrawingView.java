@@ -177,11 +177,6 @@ public class DrawingView extends ImageView {
         canvas.drawBitmap( mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath( mPath,  mPaint);
         canvas.drawPath( circlePath,  circlePaint);
-
-        // Draws debug points
-        for (int i = 0; i < spiralPoints.length; i++) {
-            canvas.drawPoint(spiralPoints[i].x, spiralPoints[i].y, mPaint);
-        }
     }
 
     private float mX, mY;
