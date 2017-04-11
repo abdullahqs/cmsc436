@@ -32,6 +32,8 @@ import java.util.Locale;
 
 public class LevelTestActivity extends AppCompatActivity implements SensorEventListener {
     public static final String RESULT_IMAGE_URI = "result_image_uri";
+    public static final String RESULT_SCORE = "result_score";
+
     private static final int REQUEST_EXTERNAL_STORAGE = 0x2;
     private static final double MIN_THRESHOLD = 0.5;
     private final static String TAG = "LevelTestActivity";
@@ -208,8 +210,10 @@ public class LevelTestActivity extends AppCompatActivity implements SensorEventL
 
         Intent i = new Intent(LevelTestActivity.this, LevelTestResultsActivity.class);
 
-        if(fileUri != null)
+        if(fileUri != null) {
             i.putExtra(RESULT_IMAGE_URI, fileUri.toString());
+            i.putExtra(RESULT_SCORE, mTiltView.getScore());
+        }
 
         startActivity(i);
     }

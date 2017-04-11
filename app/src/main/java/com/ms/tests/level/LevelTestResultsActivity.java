@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ms.tests.R;
 import com.ms.tests.SheetsStrings;
@@ -23,6 +24,8 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
     private Button mButton;
     private ImageView mResultView;
     private Uri mImageUri;
+
+    private TextView mResultScore;
 
     private static final int LIB_ACCOUNT_NAME_REQUEST_CODE = 1001;
     private static final int LIB_AUTHORIZATION_REQUEST_CODE = 1002;
@@ -72,7 +75,6 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
 
         mButton = (Button) findViewById(R.id.level_results_share_button);
         mResultView = (ImageView) findViewById(R.id.level_results_result_preview);
+        mResultScore = (TextView) findViewById(R.id.level_results_score);
 
         Intent i = getIntent();
 
@@ -90,6 +93,11 @@ public class LevelTestResultsActivity extends AppCompatActivity implements  CMSC
         }
 
         int calculation = 0;
+        int score = i.getIntExtra(LevelTestActivity.RESULT_SCORE, -1);
+        if(score != -1){
+            calculation = score;
+            mResultScore.setText(score + " / 100");
+        }
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");

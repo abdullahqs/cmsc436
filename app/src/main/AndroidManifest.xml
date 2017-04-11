@@ -45,7 +45,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".rotation.RotateResultActivity" />
         <activity android:name=".sway.SwayTestCalibration" android:screenOrientation="portrait"/>
-        <activity android:name=".sway.SwayTestConfig" />
+        <activity android:name=".sway.SwayTestConfig" android:screenOrientation="portrait" />
         <activity android:name=".sway.SwayTestResults" />
     </application>
 
