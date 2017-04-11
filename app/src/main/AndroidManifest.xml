@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestSelectionActivity">
+        <activity android:name=".TestSelectionActivity"
+	    android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,10 +44,9 @@
             android:name=".rotation.RotateTestActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".rotation.RotateResultActivity" />
-        <activity android:name=".sway.SwayTestCalibration" />
-        <activity android:name=".sway.SwayTestConfig" />
+        <activity android:name=".sway.SwayTestCalibration" android:screenOrientation="portrait"/>
+        <activity android:name=".sway.SwayTestConfig" android:screenOrientation="portrait"/>
         <activity android:name=".sway.SwayTestResults" />
-        <activity android:name=".sway.SwayTiltView"></activity>
     </application>
 
 </manifest>
