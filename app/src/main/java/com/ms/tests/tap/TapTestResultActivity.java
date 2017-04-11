@@ -82,10 +82,10 @@ public class TapTestResultActivity extends AppCompatActivity implements CMSC436S
         }
 
         results.setValue(totalNumTaps/results.numTests);
-
+        int answer = (int) (results.getValue());
         handTest.setText(results.isLeftHand ? "Left hand test" : "Right hand test" );
         numTests.setText("Ran a total of: " + results.numTests + " test" + (results.numTests > 1 ? "s" : "") + ".");
-        averageTaps.setText("Average of: " + (results.getValue()) + " taps per test.");
+        averageTaps.setText("Average of: " + answer + " taps per test.");
 
         final String shareString = ((results.isLeftHand ? "Left Hand Test\n" : "Right Hand Test\n") + "Ran a total of " + results.numTests + " test\n" + (results.numTests > 1 ? "s" : "") + ".\n" + "Average of: " + (totalNumTaps / results.numTests) + " taps per test.");
 
@@ -112,8 +112,15 @@ public class TapTestResultActivity extends AppCompatActivity implements CMSC436S
             }
         });
 
-        sheet = new CMSC436Sheet(this, getString(R.string.app_name), "1ooKJktuWc0N9SFUkcI8GlgkoRQLGP6mqOwt2TKmOIDo");
-        sheet.writeData(CMSC436Sheet.TestType.LH_TAP, "ayylamo", CMSC436Sheet.unixToSheetsEpoch(System.currentTimeMillis()));
-        sheet.writeData(CMSC436Sheet.TestType.LH_TAP, "ayylamo", 1.23f);
+        if (results.isLeftHand){
+            sheet = new CMSC436Sheet(this, getString(R.string.app_name), "1ooKJktuWc0N9SFUkcI8GlgkoRQLGP6mqOwt2TKmOIDo");
+            sheet.writeData(CMSC436Sheet.TestType.RH_TAP, "t15p01", System.currentTimeMillis());
+            sheet.writeData(CMSC436Sheet.TestType.LH_TAP, "t15p01", answer);
+        } else {
+            sheet = new CMSC436Sheet(this, getString(R.string.app_name), "1ooKJktuWc0N9SFUkcI8GlgkoRQLGP6mqOwt2TKmOIDo");
+            sheet.writeData(CMSC436Sheet.TestType.RH_TAP, "t15p01", System.currentTimeMillis());
+            sheet.writeData(CMSC436Sheet.TestType.RH_TAP, "t15p01", answer);
+        }
+
     }
 }
