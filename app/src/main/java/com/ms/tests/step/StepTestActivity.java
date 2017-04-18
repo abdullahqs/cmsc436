@@ -22,10 +22,12 @@ import java.util.LinkedList;
 public class StepTestActivity extends AppCompatActivity {
     public static final String STEP_TEST_LENGTH = "step_test_length";
     public static final String STEP_TEST_TARGET = "step_test_target_steps";
+    public static final String STEP_TEST_MOVING_VELOCITY = "step_test_moving_veloc";
+    public static final String STEP_TEST_ACCUMULATED_VELOCITY = "step_test_accum_veloc";
 
     private static final String TAG = StepTestActivity.class.getSimpleName();
-    private static final int MESSAGE_UPDATE_STEP_COUNT = 0x1;
-    private static final int TARGET_STEPS = 25;
+    private static final int MESSAGE_TEST_FINISHED = 0x1;
+    private static final long TARGET_STEPS_TIME = 10000000000l;
 
     private SensorManager mSensorManager;
     private Sensor mSensor;
@@ -37,12 +39,8 @@ public class StepTestActivity extends AppCompatActivity {
             super.handleMessage(msg);
 
             switch(msg.what){
-                case MESSAGE_UPDATE_STEP_COUNT:
-                    mStepCount.setText("Steps: " + mSteps);
-
-                    if(mSteps >= TARGET_STEPS){
-                        finishTest();
-                    }
+                case MESSAGE_TEST_FINISHED:
+                    finishTest();
                     break;
             }
         }
@@ -60,29 +58,66 @@ public class StepTestActivity extends AppCompatActivity {
     private boolean mBeepLoaded;
     private int mBeepId;
     private int mHornId;
-    private int mSteps;
+    private double velocity;
+    private long mLastTimestamp = -1;
+
+    private double prevAccelX = 0, prevAccelY = 0;
+
+    private Vector mAverageVelocity = new Vector(-1, -1);
+    private class Vector {
+        double x;
+        double y;
+
+        public Vector(double x, double y){
+            this.x = x;
+            this.y = y;
+        }
+
+        double magnitude(){
+            return Math.sqrt(x*x + y*y);
+        }
+    }
+
+    private Vector mPreviousAccel = new Vector(-1, -1);
 
     private SensorEventListener mStepListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            long mCurrLastTime = System.currentTimeMillis();
-            mLastStepDeltas.add(mCurrLastTime - mLastStepTime);
-            mLastStepTime = mCurrLastTime;
+            if(mLastTimestamp == -1) {
+                mLastTimestamp = event.timestamp;
+                mAverageVelocity.x = 0;
+                mAverageVelocity.y = 0;
 
-            mSteps += event.values.length;
-
-            Message m = new Message();
-            m.what = MESSAGE_UPDATE_STEP_COUNT;
-
-            if(mSteps < TARGET_STEPS) {
-                int result = mSoundPool.play(mBeepId, 1, 1, 1, 0, 6);
-            }else{
-                mEndTime = mCurrLastTime;
-                int result = mSoundPool.play(mHornId, 1, 1, 1, 0, 1.5f);
+                mPreviousAccel.x = 0;
+                mPreviousAccel.y = 0;
+                return;
             }
-            mUpdateHandler.sendMessage(m);
 
-            Log.i(TAG, "New step detected by STEP_DETECTOR sensor. Total step count: " + mSteps);
+            double accelX, accelY, distX = 0, distY = 0, velX = mAverageVelocity.x, velY = mAverageVelocity.y;
+            double accelKFactor = 0.1;
+
+            accelX = event.values[0];
+            accelY = event.values[1];
+
+            accelX = (accelX * accelKFactor) + prevAccelX * (1 - accelKFactor);
+            accelY = (accelY * accelKFactor) + prevAccelY * (1 - accelKFactor);
+
+            double interval = (event.timestamp - mLastTimestamp) * (1.0f / 1000000000.0f);
+
+            mAverageVelocity.x += accelX * interval;
+            mAverageVelocity.y += accelY * interval;
+
+            distX += mAverageVelocity.x*interval + velX;
+            distY += mAverageVelocity.y*interval + velY;
+
+            if(event.timestamp - mLastTimestamp < TARGET_STEPS_TIME) {
+                //int result = mSoundPool.play(mBeepId, 1, 1, 1, 0, 6);
+            }else{
+                mEndTime = event.timestamp;
+                int result = mSoundPool.play(mHornId, 1, 1, 1, 0, 1.5f);
+                Message m = Message.obtain(mUpdateHandler, MESSAGE_TEST_FINISHED);
+                mUpdateHandler.sendMessage(m);
+            }
         }
 
         @Override
@@ -112,13 +147,10 @@ public class StepTestActivity extends AppCompatActivity {
                     mBeepLoaded = true;
                 }else if(mBeepLoaded && sampleId == mHornId){
                     Log.d(TAG, "LOADED HORN SOUND");
-                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+                    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
                     mSoundPool.play(mHornId, 1, 1, 1, 0, 1.5f);
-                    mStartTime = System.currentTimeMillis();
-                    mLastStepTime = mStartTime;
-                    mLastStepDeltas = new LinkedList<>();
-                    mSensorManager.registerListener(mStepListener, mSensor, SensorManager.SENSOR_DELAY_FASTEST, mHandler);
+                    mSensorManager.registerListener(mStepListener, mSensor, SensorManager.SENSOR_DELAY_GAME, mHandler);
                 }
             }
         });
@@ -127,13 +159,12 @@ public class StepTestActivity extends AppCompatActivity {
     }
 
     private void finishTest(){
-        Intent i = new Intent(this, StepTestResultActivity.class);
-        double length = (mEndTime - mStartTime) / 1000;
-        i.putExtra(STEP_TEST_LENGTH, length);
-        i.putExtra(STEP_TEST_TARGET, TARGET_STEPS);
-
         mSensorManager.unregisterListener(mStepListener);
         mHandlerThread.quit();
+
+        Intent i = new Intent(this, StepTestResultActivity.class);
+        i.putExtra(STEP_TEST_ACCUMULATED_VELOCITY, mAverageVelocity.magnitude()/100);
+
 
         startActivity(i);
     }

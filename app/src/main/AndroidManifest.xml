@@ -56,7 +56,8 @@
             android:name=".step.StepTestActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".step.StepLaunchActivity" />
-        <activity android:name=".step.StepTestResultActivity"></activity>
+        <activity android:name=".step.StepTestResultActivity" />
+        <activity android:name=".outdoorstep.OutdoorStepTestActivity"></activity>
     </application>
 
 </manifest>

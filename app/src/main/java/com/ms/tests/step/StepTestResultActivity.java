@@ -18,14 +18,14 @@ public class StepTestResultActivity extends AppCompatActivity {
         mStepTime = (TextView) findViewById(R.id.step_length_view);
 
         Intent i = getIntent();
-        double testTime;
-        int numSteps;
+        double movingVelocity;
+        double accumVelocity;
 
         if(i != null){
-            testTime = i.getDoubleExtra(StepTestActivity.STEP_TEST_LENGTH, 0);
-            numSteps = i.getIntExtra(StepTestActivity.STEP_TEST_TARGET, 0);
+            //movingVelocity = i.getDoubleExtra(StepTestActivity.STEP_TEST_MOVING_VELOCITY, 0);
+            accumVelocity = i.getDoubleExtra(StepTestActivity.STEP_TEST_ACCUMULATED_VELOCITY, 0);
 
-            mStepTime.setText("You walked a total of " + numSteps + " steps in " + testTime + " seconds.");
+            mStepTime.setText("Accumulated Average Speed: " + accumVelocity + "m/s");
         }
     }
 }
