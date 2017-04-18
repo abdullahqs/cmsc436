@@ -10,6 +10,7 @@ import com.ms.tests.bubble.BubbleTestActivity;
 import com.ms.tests.level.LevelTestActivity;
 import com.ms.tests.rotation.RotateTestCalibrationActivity;
 import com.ms.tests.spiral.SpiralTestActivity;
+import com.ms.tests.step.StepLaunchActivity;
 import com.ms.tests.sway.SwayTestConfig;
 import com.ms.tests.tap.TapConfigActivity;
 
@@ -55,4 +56,8 @@ public class TestSelectionActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void onStepClick(View v){
+        Intent i = new Intent(this, StepLaunchActivity.class);
+        startActivity(i);
+    }
 }

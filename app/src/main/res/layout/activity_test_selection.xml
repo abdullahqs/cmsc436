@@ -22,9 +22,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="onTapClick"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:fontFamily="Roboto"
-        android:background="#E0FF4F"
+        android:background="#FFF9C4"
         android:textColor="#000000"
         />
 
@@ -40,10 +40,10 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="onSpiralClick"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:fontFamily="Roboto"
-        android:background="#FF6663"
         android:textColor="#000000"
+        android:background="#FFCCBC"
         />
 
     <Button
@@ -57,10 +57,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:onClick="onLevelClick"
         android:fontFamily="Roboto"
-        android:background="#BFD7EA"
+        android:background="#B3E5FC"
         android:textColor="#000000"
         />
 
@@ -75,10 +75,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:onClick="onBubbleClick"
         android:fontFamily="Roboto"
-        android:background="#008080"
+        android:background="#B2DFDB"
         android:textColor="#000000"
         />
 
@@ -93,7 +93,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:onClick="onRotationClick"
         android:fontFamily="Roboto"
         android:background="#9E7682"
@@ -101,11 +101,12 @@
         />
 
     <Button
+        android:background="#FF6663"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "Sway Test"
         android:id="@+id/swayButton"
-        android:textSize="45sp"
+        android:textSize="@dimen/buttonSize"
         android:onClick="onSwayClick"
         android:textColor="#000000"
         android:fontFamily="Roboto"
@@ -115,5 +116,18 @@
         android:layout_marginTop="16dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Step Test"
+        android:background="#D1C4E9"
+        android:layout_marginTop="16dp"
+        android:textColor="#000"
+        android:fontFamily="Roboto"
+        android:textSize="@dimen/buttonSize"
+        android:onClick="onStepClick"
+        android:id="@+id/stepButton"
+        android:layout_below="@+id/swayButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

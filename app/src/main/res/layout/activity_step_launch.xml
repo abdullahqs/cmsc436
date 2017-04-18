@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ms.tests.step.StepLaunchActivity">
+
+    <TextView
+        android:id="@+id/step_info"
+        android:padding="20dp"
+        android:lineSpacingMultiplier="1.5"
+        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:text="After clicking start, you will have 3 seconds to put your phone in your pocket. A horn sound will then signal the start and end of the test after 25 steps have been recorded."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_below="@id/step_info"
+        android:onClick="onStartTest"
+        android:padding="15dp"
+        android:textSize="30sp"
+        android:id="@+id/start_step_test"
+        android:layout_centerInParent="true"
+        android:text="Start step test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:visibility="invisible"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:layout_centerInParent="true"
+        android:text="3"
+        android:textColor="@android:color/white"
+        android:id="@+id/step_countdown_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
